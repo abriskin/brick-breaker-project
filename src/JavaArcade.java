@@ -9,7 +9,7 @@ public interface JavaArcade {
     /* This method should return true if your game is in a "start" state, it should return false if
      * your game is in a "paused" state or "stopped" or "unstarted" */
 
-    public boolean running();
+    public boolean isRunning();
 
     /* This method should start your game, it should also set a global boolean value so that your running method
      * can return the appropriate value */
@@ -42,7 +42,7 @@ public interface JavaArcade {
     public int getPoints(); //add to spec
 
     /* This method provides access to GameStats display for UserPanel to pass information to update score
-    GameStats is created in Arcade, a reference should be passed to UserPanel (main panel) to update poionts */
+    GameStats is created in Arcade, a reference should be passed to UserPanel (main panel) to update points */
     public void setDisplay(GameStats d);
 
 }
