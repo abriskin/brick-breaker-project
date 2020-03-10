@@ -3,5 +3,9 @@ public class Ball{
     private int height;
 
 
+    public void draw() {
+    }
 
+    public void move() {
+    }
 }

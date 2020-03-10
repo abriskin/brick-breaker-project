@@ -16,6 +16,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     Color[] pickColors() {
         //return 2 random colors from colorList
+        return new Color[2];
     }
 
     public UserPanel (int width, int length) {
@@ -58,19 +59,74 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         bar.moveToMouse(e.getX(), e.getY());
     }
 
-    public boolean running() {
-
+    public boolean isRunning() {
+        return running;
     }
 
-    public void startGame();
+    public void startGame() {
+        //pick brick colors & assign them to brickList
+        //start timers, draw everything for the first time, maybe display
+        //some sort of "press space to start" message
+        running = true;
+    }
+
     public String getGameName(){
-        return "Brick - Breaker";
+        return "Brick Breaker (!)";
     }
-    public void pauseGame();
-    public String getInstructions();
-    public String getCredits();
-    public String getHighScore();
-    public void stopGame();
-    public int getPoints();
-    public void setDisplay();
+
+    public void pauseGame() {
+        //stop timer
+        //the description says "save your scores" but idk why the scores
+        //would reset at all
+        running = false;
+    }
+
+    public void resumeGame() {
+        //start timer
+        running = true;
+    }
+
+    public String getInstructions() {
+        return "break the bricks. control the bar using the mouse or " +
+                "left and right arrow keys.";
+    }
+
+    public String getCredits() {
+        return "adi briskin & jessica liao";
+    }
+
+    public String getHighScore() {
+        //add actual highScore
+        String highScore = " ";
+        return highScore;
+    }
+
+    public void stopGame() {
+        //stop timer
+        points = 0;
+        lives = 3;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setDisplay(GameStats d) {
+        //no clue ngl
+    }
+
+    public void mouseClicked(MouseEvent e) {
+        if (!running)
+            resumeGame();
+    }
+
+    public void mousePressed(MouseEvent e) {}
+
+    public void mouseReleased(MouseEvent e) {}
+
+    public void mouseEntered(MouseEvent e) {}
+
+    public void mouseExited(MouseEvent e) {}
+
+    public void mouseDragged(MouseEvent e) {}
 }

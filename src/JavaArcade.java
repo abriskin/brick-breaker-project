@@ -37,9 +37,9 @@ public interface JavaArcade {
     /* This method should stop the timers, reset the score, and set a running boolean value to false */
     public void stopGame();
 
-    /* This method shoud return the current players number of points */
+    /* This method should return the current players number of points */
 
-    public int getPoints(); //add to spec
+    public int getPoints();
 
     /* This method provides access to GameStats display for UserPanel to pass information to update score
     GameStats is created in Arcade, a reference should be passed to UserPanel (main panel) to update points */
