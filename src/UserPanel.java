@@ -15,16 +15,20 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
                                     Color.PINK, Color.YELLOW};
 
     Color[] pickColors() {
-        //return 2 random colors from colorList
-        return new Color[2];
+        int colorNum = (int) (Math.random() * colorList.length);
+        int colorNum1 = colorNum;
+        while (colorNum1 == colorNum)
+            colorNum1 = (int) (Math.random() * colorList.length);
+        Color[] returnArray = new Color[] {colorList[colorNum], colorList[colorNum1]};
+        return returnArray;
     }
 
     public UserPanel (int width, int length) {
         lives = 3;
         points = 0;
-        //make brickList
         ball = new Ball();
         bar = new Bar();
+        ArrayList BrickList = new ArrayList<Brick>;
         //define mouseListener
         //define actionListener
         //define timer
