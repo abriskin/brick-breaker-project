@@ -12,7 +12,6 @@ public class Arcade extends JFrame {
 
         GameStats display = new GameStats(game); //passing in a JavaArcade, therefore I know I can call getHighScore(), getScore()
 
-
         ControlPanel controls = new ControlPanel(game, display); //Also passing in JavaArcade to ControlPanel, I know you will respond to buttons
 
         game.setDisplay(display); //provides game ability to update display
