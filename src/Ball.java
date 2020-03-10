@@ -4,6 +4,7 @@ public class Ball{
 
 
     public void draw() {
+
     }
 
     public void move() {

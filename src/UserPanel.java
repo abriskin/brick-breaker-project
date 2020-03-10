@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     Color[] colorList = new Color[] {Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
                                     Color.PINK, Color.YELLOW};
 
-    Color[] pickColors() {
+    private Color[] pickColors() {
         int colorNum = (int) (Math.random() * colorList.length);
         int colorNum1 = colorNum;
         while (colorNum1 == colorNum)
@@ -28,7 +29,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         points = 0;
         ball = new Ball();
         bar = new Bar();
-        ArrayList BrickList = new ArrayList<Brick>;
+        BrickList = new ArrayList<Brick>();
         //define mouseListener
         //define actionListener
         //define timer
@@ -69,8 +70,15 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void startGame() {
         //pick brick colors & assign them to brickList
+        Color[] c = pickColors();
+        for(int i  = 0; i < BrickList.size(); i++) {
+            BrickList.add(new Brick(c[i%2]);
+        }
+
         //start timers, draw everything for the first time, maybe display
         //some sort of "press space to start" message
+        System.out.print("Click here to start!");
+        //if the person does click, then start
         running = true;
     }
 
