@@ -3,14 +3,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class UserPanel extends JPanel implements JavaArcade, MouseListener,
-        ActionListener, MouseMotionListener {
+import static java.awt.event.KeyEvent.*;
 
-    private boolean running;
-    private ArrayList BrickList;
+public class UserPanel extends JPanel implements JavaArcade, MouseListener,
+        MouseMotionListener, ActionListener, KeyListener {
+
+    private GameState running;
+    private ArrayList<Brick> BrickList;
     private Ball ball;
     private Bar bar;
     private int lives, points;
+    private static int rounds = 0;
     Color[] colorList = new Color[] {Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
                                     Color.PINK, Color.YELLOW};
 
@@ -24,15 +27,14 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public UserPanel (int width, int length) {
-        lives = 3;
-        points = 0;
         ball = new Ball();
         bar = new Bar();
-        ArrayList BrickList = new ArrayList<Brick>;
-        //define mouseListener
-        //define actionListener
-        //define timer
-        //set key controls
+        BrickList = new ArrayList<Brick>();
+        //"this", i.e. UserPanel, is both a MouseListener and a MouseMotionListener
+        addMouseListener(this);
+        addMouseMotionListener(this);
+        addKeyListener(this);
+        Timer timer = new Timer(500, this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -41,14 +43,32 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void keyPressed(KeyEvent e) {
-        //switch statment for moving bar left/right depending on which
+        //switch statement for moving bar left/right depending on which
         //key is pressed (left/right arrow)
+        //if space bar is pressed pause/resume game
+        switch(e.getKeyCode()) {
+            case (VK_RIGHT):
+                bar.moveRight();
+                break;
+            case (VK_LEFT)():
+                bar.moveLeft();
+                break;
+            case(VK_SPACE):
+                if (running == GameState.PAUSED)
+                    resumeGame();
+                else if (running == GameState.PLAYING)
+                    pauseGame();
+        }
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //for loop: draw all blocks from brickList
-        //for loop (length of lives): draw hearts
+        for (Brick b : BrickList) {
+            b.draw();
+        }
+        for (int i = 0; i < lives; i++) {
+            //todo: draw heart, somehow
+        }
         ball.draw();
         bar.draw();
     }
@@ -63,7 +83,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         bar.moveToMouse(e.getX(), e.getY());
     }
 
-    public boolean isRunning() {
+    public GameState isRunning() {
         return running;
     }
 
@@ -71,7 +91,9 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         //pick brick colors & assign them to brickList
         //start timers, draw everything for the first time, maybe display
         //some sort of "press space to start" message
-        running = true;
+        lives = 3;
+        points = 0;
+        running = GameState.PLAYING;
     }
 
     public String getGameName(){
@@ -82,12 +104,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         //stop timer
         //the description says "save your scores" but idk why the scores
         //would reset at all
-        running = false;
+        running = GameState.PAUSED;
     }
 
     public void resumeGame() {
         //start timer
-        running = true;
+        running = GameState.PLAYING;
     }
 
     public String getInstructions() {
@@ -109,20 +131,30 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         //stop timer
         points = 0;
         lives = 3;
+        running = GameState.STOPPED;
     }
 
     public int getPoints() {
         return points;
     }
 
+    public int getRounds() {
+        return rounds;
+    }
+
     public void setDisplay(GameStats d) {
         //no clue ngl
     }
 
-    public void mouseClicked(MouseEvent e) {
-        if (!running)
-            resumeGame();
+    public int getMouseX(MouseEvent e) {
+        return e.getX();
     }
+
+    public int getMouseY(MouseEvent e) {
+        return e.getY();
+    }
+
+    public void mouseClicked(MouseEvent e) {}
 
     public void mousePressed(MouseEvent e) {}
 
@@ -133,4 +165,9 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void mouseExited(MouseEvent e) {}
 
     public void mouseDragged(MouseEvent e) {}
+
+    public void keyTyped(KeyEvent e) {}
+
+    public void keyReleased(KeyEvent e) {}
+
 }

@@ -9,7 +9,7 @@ public interface JavaArcade {
     /* This method should return true if your game is in a "start" state, it should return false if
      * your game is in a "paused" state or "stopped" or "unstarted" */
 
-    public boolean isRunning();
+    public GameState isRunning();
 
     /* This method should start your game, it should also set a global boolean value so that your running method
      * can return the appropriate value */
