@@ -72,7 +72,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         //pick brick colors & assign them to brickList
         Color[] c = pickColors();
         for(int i  = 0; i < BrickList.size(); i++) {
-            BrickList.add(new Brick(c[i%2]);
+            BrickList.add(new Brick(c[i%2], getMouseX(), getMouseY()));
         }
 
         //start timers, draw everything for the first time, maybe display
