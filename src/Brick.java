@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Brick extends Rectangle{
     private int direction, velocity;
-    public Brick(Color c, int x, int y, int w, int roundNum) {
-        super(c, x, y, w);
+    public Brick(Color c, int x, int y, int roundNum) {
+        super(c, x, y, 60, 30);
         direction = 0;
         velocity = 3 * roundNum();
     }

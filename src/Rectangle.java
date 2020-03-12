@@ -3,15 +3,15 @@ import java.awt.*;
 public class Rectangle extends GameObject{
     private int width, height;
 
-    public Rectangle(Color c, int x, int y, int w) {
+    public Rectangle(Color c, int x, int y, int w, int h) {
         super(c, x, y);
         width = w;
-        height = w/3;
+        height = h;
     }
 ///check for the other screen
 
     public static void setPanelWidth(int w) {
-        panelWidth = w;
+        super.getPanelWidth() = w;
     }
     public void draw(Graphics g){
         Color oldColor = g.getColor();

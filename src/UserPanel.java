@@ -34,8 +34,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public UserPanel (int width, int length) {
-        ball = new Ball();
-        bar = new Bar();
+        ball = new Ball(300, 400, rounds);
+        bar = new Bar(300, 425, rounds);
         BrickList = new ArrayList<Brick>();
         try {
             heart = ImageIO.read(new File("uglyheart.jpg"));
@@ -101,9 +101,10 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void startGame() {
+        rounds++;
         Color[] c = pickColors();
         for(int i  = 0; i < BrickList.size(); i++) {
-            BrickList.add(new Brick(c[i%2], mouseX, mouseY));
+            BrickList.add(new Brick(c[i % 2], mouseX, mouseY, rounds));
         }
         timer.start();
         //todo: add starting message
