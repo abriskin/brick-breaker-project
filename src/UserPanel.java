@@ -80,10 +80,14 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             b.draw();
         }
         for (int i = 0; i < lives; i++) {
-            //todo: draw heart, somehow
+            g.drawImage(heart, 550 + i*10, 10, null);
         }
         ball.draw();
         bar.draw();
+        if (!(running == GameState.PLAYING))
+            g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
+                        "bar using the mouse or left and rihgt keys. Loser.", 200,
+                300);
     }
 
     //changes coordinates of ball so that next time the screen is repainted,
@@ -100,13 +104,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return running;
     }
 
-    public void startGame() {
+    public void startGame(Graphics g) {
         Color[] c = pickColors();
         for(int i  = 0; i < BrickList.size(); i++) {
             BrickList.add(new Brick(c[i%2], mouseX, mouseY));
         }
         timer.start();
-        //todo: add starting message
         lives = 3;
         points = 0;
         running = GameState.PLAYING;
@@ -142,7 +145,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void stopGame() {
-        //todo: add "thank you for playing" message
         timer.stop();
         running = GameState.STOPPED;
     }
