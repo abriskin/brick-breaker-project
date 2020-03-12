@@ -5,7 +5,7 @@ public abstract class GameObject {
     private int centerX, centerY;
     private Color color;
     private boolean filled;
-    private static int panelWidth; //All enemies will share this information
+    private static int panelWidth = 600; //All enemies will share this information
 
     public GameObject(Color c, int x, int y) {
         color = c;
@@ -17,11 +17,19 @@ public abstract class GameObject {
     public static void setPanelWidth(int w) {
         panelWidth = w;
     }
-
+    public boolean isFilled(){
+        return filled;
+    }
     public int getX(){
         return centerX;
     }
 
+    public void setX(int x) {
+        centerX = x;
+    }
+    public void setY(int y){
+        centerY = y;
+    }
     public int getY(){
         return centerY;
     }
