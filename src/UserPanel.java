@@ -81,6 +81,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         for (int i = 0; i < lives; i++) {
             g.drawImage(heart, 550 + i * 10, 10, null);
         }
+        ball.draw(g);
+        bar.draw(g);
         ball.draw();
         bar.draw();
         if (!(running == GameState.PLAYING))
