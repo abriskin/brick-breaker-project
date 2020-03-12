@@ -1,46 +1,32 @@
 import java.awt.*;
-public class Rectangle extends GameObject{
-    private int width, height;
-    private static int panelWidth; //All enemies will share this information
 
-    public Rectangle(Color c, int x, int y, int w) {
-        super(c, x, y);
-        width = w;
-        height = w/3;
-        //games++;
+public class Brick extends Rectangle{
+    private int direction, velocity;
+    public Brick(Color c, int x, int y, int w, int roundNum) {
+        super(c, x, y, w);
+        direction = 0;
+        velocity = 3 * roundNum();
     }
 
-    public static void setPanelWidth(int w) {
-        panelWidth = w;
-    }
     public void draw(Graphics g){
         Color oldColor = g.getColor();
         g.setColor(super.getColor());
         // Translates circle's center to rectangle's origin for drawing.
-        if (super.getfilled)
-            g.fillRect(centerX - width/2, centerY - height/2, width, height);
+        if (super.isFilled())
+            g.fillRect(super.getX() - super.getWidth()/2, super.getY() - super.getHeight()/2, super.getWidth(), super.getHeight());
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);
     }
-
-    public int getX(){
-        return centerX;
-    }
-
-    public int getY(){
-        return centerY;
-    }
-
     public void move(){
         int xVal = getX();
 
-        if(xVal + width > panelWidth){  //include getWidth() so we bounce off on the right edge
+        if(xVal + super.getWidth() > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
             direction=0; //negative;
             xVal-=velocity;
         }
 
-        else if(xVal -  < 0){
+        else if(xVal - super.getWidth() < 0){
 
             xVal+=velocity;
             direction = 1; //positive
@@ -53,7 +39,6 @@ public class Rectangle extends GameObject{
             else
                 xVal-=velocity;
         }
-        centerX = xVal;
+        super.setX(xVal);
     }
-
 }
