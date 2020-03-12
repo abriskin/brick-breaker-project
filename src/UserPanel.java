@@ -1,7 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static java.awt.event.KeyEvent.*;
@@ -13,8 +17,10 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private ArrayList<Brick> BrickList;
     private Ball ball;
     private Bar bar;
-    private int lives, points;
+    private BufferedImage heart;
+    private int lives, points, mouseX, mouseY;
     private static int rounds = 0;
+    Timer timer;
     Color[] colorList = new Color[] {Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
                                     Color.PINK, Color.YELLOW};
 
@@ -31,11 +37,17 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         ball = new Ball();
         bar = new Bar();
         BrickList = new ArrayList<Brick>();
+        try {
+            heart = ImageIO.read(new File("uglyheart.jpg"));
+        }
+        catch (IOException e){
+            System.out.println("heart file invalid");
+        }
         //"this", i.e. UserPanel, is both a MouseListener and a MouseMotionListener
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
-        Timer timer = new Timer(500, this);
+        timer = new Timer(500, this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -51,7 +63,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             case (VK_RIGHT):
                 bar.moveRight();
                 break;
-            case (VK_LEFT)():
+            case (VK_LEFT):
                 bar.moveLeft();
                 break;
             case(VK_SPACE):
@@ -81,7 +93,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void mouseMoved(MouseEvent e) {
-        bar.moveToMouse(e.getX(), e.getY());
+        bar.moveToMouse(mouseX, mouseY);
     }
 
     public GameState isRunning() {
@@ -89,14 +101,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void startGame() {
-        //pick brick colors & assign them to brickList
         Color[] c = pickColors();
         for(int i  = 0; i < BrickList.size(); i++) {
-            BrickList.add(new Brick(c[i%2], getMouseX(), getMouseY()));
+            BrickList.add(new Brick(c[i%2], mouseX, mouseY));
         }
-
-        //start timers, draw everything for the first time, maybe display
-        //some sort of "press space to start" message
+        timer.start();
+        //todo: add starting message
         lives = 3;
         points = 0;
         running = GameState.PLAYING;
@@ -107,14 +117,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void pauseGame() {
-        //stop timer
-        //the description says "save your scores" but idk why the scores
-        //would reset at all
+        timer.stop();
         running = GameState.PAUSED;
     }
 
     public void resumeGame() {
-        //start timer
+        timer.start();
         running = GameState.PLAYING;
     }
 
@@ -128,15 +136,14 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public String getHighScore() {
-        //add actual highScore
+        //todo: get high score
         String highScore = " ";
         return highScore;
     }
 
     public void stopGame() {
-        //stop timer
-        points = 0;
-        lives = 3;
+        //todo: add "thank you for playing" message
+        timer.stop();
         running = GameState.STOPPED;
     }
 
@@ -148,16 +155,13 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return rounds;
     }
 
+    public void updateMouseCoordinates(MouseEvent e) {
+        mouseX = e.getX();
+        mouseY = e.getY();
+    }
+
     public void setDisplay(GameStats d) {
-        //no clue ngl
-    }
-
-    public int getMouseX(MouseEvent e) {
-        return e.getX();
-    }
-
-    public int getMouseY(MouseEvent e) {
-        return e.getY();
+        //todo: figure out
     }
 
     public void mouseClicked(MouseEvent e) {}
