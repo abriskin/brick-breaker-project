@@ -50,7 +50,7 @@ public class ControlPanel extends JPanel
 
         if (button == startButton) {
 
-            if (!game.running()) {
+            if (!(game.isRunning() == GameState.PLAYING)) {
 
                 ((JPanel) (game)).requestFocus(); //need to provide the JPanel focus
                 game.startGame();

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Brick extends Rectangle{
+public class Brick extends Rectangle {
     private int direction, velocity;
     public Brick(Color c, int x, int y, int roundNum) {
         super(c, x, y, 60, 30);
@@ -8,36 +8,32 @@ public class Brick extends Rectangle{
         velocity = 3 * roundNum();
     }
 
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
         Color oldColor = g.getColor();
         g.setColor(super.getColor());
         // Translates circle's center to rectangle's origin for drawing.
         if (super.isFilled())
-            g.fillRect(super.getX() - super.getWidth()/2, super.getY() - super.getHeight()/2, super.getWidth(), super.getHeight());
+            g.fillRect(super.getX() - super.getWidth() / 2, super.getY() - super.getHeight() / 2, super.getWidth(), super.getHeight());
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);
     }
-    public void move(){
+
+    public void move() {
         int xVal = getX();
 
-        if(xVal + super.getWidth() > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
-            direction=0; //negative;
-            xVal-=velocity;
-        }
+        if (xVal + super.getWidth() > super.getPanelWidth()) {  //include getWidth() so we bounce off on the right edge
+            direction = 0; //negative;
+            xVal -= velocity;
+        } else if (xVal - super.getWidth() < 0) {
 
-        else if(xVal - super.getWidth() < 0){
-
-            xVal+=velocity;
+            xVal += velocity;
             direction = 1; //positive
-        }
-
-        else
-        {
-            if(direction == 1)
-                xVal+=velocity;
+        } else {
+            if (direction == 1)
+                xVal += velocity;
             else
-                xVal-=velocity;
+                xVal -= velocity;
         }
         super.setX(xVal);
     }

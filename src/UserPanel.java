@@ -21,15 +21,15 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private int lives, points, mouseX, mouseY;
     private static int rounds = 0;
     Timer timer;
-    Color[] colorList = new Color[] {Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
-                                    Color.PINK, Color.YELLOW};
+    Color[] colorList = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
+            Color.PINK, Color.YELLOW};
 
     private Color[] pickColors() {
         int colorNum = (int) (Math.random() * colorList.length);
         int colorNum1 = colorNum;
         while (colorNum1 == colorNum)
             colorNum1 = (int) (Math.random() * colorList.length);
-        Color[] returnArray = new Color[] {colorList[colorNum], colorList[colorNum1]};
+        Color[] returnArray = new Color[]{colorList[colorNum], colorList[colorNum1]};
         return returnArray;
     }
 
@@ -39,8 +39,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         BrickList = new ArrayList<Brick>();
         try {
             heart = ImageIO.read(new File("uglyheart.jpg"));
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println("heart file invalid");
         }
         //"this", i.e. UserPanel, is both a MouseListener and a MouseMotionListener
@@ -59,14 +58,14 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         //switch statement for moving bar left/right depending on which
         //key is pressed (left/right arrow)
         //if space bar is pressed pause/resume game
-        switch(e.getKeyCode()) {
+        switch (e.getKeyCode()) {
             case (VK_RIGHT):
                 bar.moveRight();
                 break;
             case (VK_LEFT):
                 bar.moveLeft();
                 break;
-            case(VK_SPACE):
+            case (VK_SPACE):
                 if (running == GameState.PAUSED)
                     resumeGame();
                 else if (running == GameState.PLAYING)
@@ -77,17 +76,17 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Brick b : BrickList) {
-            b.draw();
+            b.draw(g);
         }
         for (int i = 0; i < lives; i++) {
-            g.drawImage(heart, 550 + i*10, 10, null);
+            g.drawImage(heart, 550 + i * 10, 10, null);
         }
         ball.draw();
         bar.draw();
         if (!(running == GameState.PLAYING))
             g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
-                        "bar using the mouse or left and rihgt keys. Loser.", 200,
-                300);
+                            "bar using the mouse or left and rihgt keys. Loser.", 200,
+                    300);
     }
 
     //changes coordinates of ball so that next time the screen is repainted,
@@ -116,7 +115,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         running = GameState.PLAYING;
     }
 
-    public String getGameName(){
+    public String getGameName() {
         return "Brick Breaker (!)";
     }
 
@@ -167,20 +166,28 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         //todo: figure out
     }
 
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+    }
 
-    public void mousePressed(MouseEvent e) {}
+    public void mousePressed(MouseEvent e) {
+    }
 
-    public void mouseReleased(MouseEvent e) {}
+    public void mouseReleased(MouseEvent e) {
+    }
 
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+    }
 
-    public void mouseExited(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {
+    }
 
-    public void mouseDragged(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e) {
+    }
 
-    public void keyTyped(KeyEvent e) {}
+    public void keyTyped(KeyEvent e) {
+    }
 
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {
+    }
 
 }
