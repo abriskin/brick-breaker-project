@@ -77,13 +77,13 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Brick b : BrickList) {
-            b.draw();
+            b.draw(g);
         }
         for (int i = 0; i < lives; i++) {
             //todo: draw heart, somehow
         }
-        ball.draw();
-        bar.draw();
+        ball.draw(g);
+        bar.draw(g);
     }
 
     //changes coordinates of ball so that next time the screen is repainted,

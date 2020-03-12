@@ -5,7 +5,7 @@ public class Brick extends Rectangle{
     public Brick(Color c, int x, int y, int roundNum) {
         super(c, x, y, 60, 30);
         direction = 0;
-        velocity = 3 * roundNum();
+        velocity = 3 * roundNum;
     }
 
     public void draw(Graphics g){

@@ -24,7 +24,7 @@ public class Ball extends GameObject{
     public void move() {
         int xVal = getX();
 
-        if(xVal + radius) > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
+        if(xVal + radius > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
             direction=0; //negative;
             xVal-=velocity;
         }
