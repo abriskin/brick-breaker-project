@@ -3,8 +3,8 @@ import java.awt.*;
 public class Bar extends Rectangle{
     private int direction, velocity;
  // move left and move right methods needed
-    public Bar(Color c, int x, int y, int w, int rounds) {
-        super(c, x, y, w);
+    public Bar(int x, int y, int rounds) {
+        super(Color.RED, x, y, 100, 20);
         direction = 0;
         velocity = 0;
     }

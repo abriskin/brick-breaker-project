@@ -3,7 +3,7 @@ import java.awt.*;
 public class Ball extends GameObject{
     private int radius;
     private int direction, velocity;
-    public Brick(Color c, int x, int y, int round) {
+    public Ball(int x, int y, int round) {
         super(Color.DARK_GRAY, x, y);
         radius = 10;
         direction = 0;
