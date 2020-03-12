@@ -19,8 +19,8 @@ public abstract class Rectangle {
         Color oldColor = g.getColor();
         g.setColor(super.getColor());
         // Translates circle's center to rectangle's origin for drawing.
-        if (filled)
-            g.fillRect(centerX - width/2, centerY - height/2, width, height);
+        if (super.isFilled())
+            g.fillRect(super.getX() - width/2, centerY - height/2, width, height);
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);

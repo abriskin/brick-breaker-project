@@ -17,7 +17,9 @@ public abstract class GameObject {
     public static void setPanelWidth(int w) {
         panelWidth = w;
     }
-
+    public int isFilled(){
+        return filled;
+    }
     public int getX(){
         return centerX;
     }

@@ -1,23 +1,13 @@
 import java.awt.*;
-public class Brick extends Rectangle{
-    private int centerX, centerY, width, height;
-    private Color color;
-    private int direction, velocity;
-    private boolean filled;
+public class Rectangle extends GameObject{
+    private int width, height;
     private static int panelWidth; //All enemies will share this information
-    private static int games = 0;
 
-    public Brick(Color c, int x, int y, int w) {
-        color = c;
+    public Rectangle(Color c, int x, int y, int w) {
+        super(c, x, y);
         width = w;
         height = w/3;
-        centerX = x;
-        centerY = y;
-        filled = true;
-        direction = 0;
-        games++;
-        velocity = 5 * games;
-
+        //games++;
     }
 
     public static void setPanelWidth(int w) {
@@ -25,9 +15,9 @@ public class Brick extends Rectangle{
     }
     public void draw(Graphics g){
         Color oldColor = g.getColor();
-        g.setColor(color);
+        g.setColor(super.getColor());
         // Translates circle's center to rectangle's origin for drawing.
-        if (filled)
+        if (super.getfilled)
             g.fillRect(centerX - width/2, centerY - height/2, width, height);
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
@@ -50,7 +40,7 @@ public class Brick extends Rectangle{
             xVal-=velocity;
         }
 
-        else if(xVal - width < 0){
+        else if(xVal -  < 0){
 
             xVal+=velocity;
             direction = 1; //positive

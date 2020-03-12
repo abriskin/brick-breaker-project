@@ -5,7 +5,7 @@ public class Ball extends GameObject{
     private int direction, velocity;
     private int rounds;
     public Brick(int x, int y, int round) {
-        color = ;
+        super(Color.DARK_GRAY, x, y);
         radius = 10;
         direction = 0;
         rounds = round;
@@ -17,22 +17,14 @@ public class Ball extends GameObject{
     }
     public void draw(Graphics g){
         Color oldColor = g.getColor();
-        g.setColor(color);
+        g.setColor(super.getColor());
         // Translates circle's center to rectangle's origin for drawing.
-        if (filled)
-            g.fillOval(centerX - radius/2, centerY - radius/2, radius, radius);
+            g.fillOval(super.getX() - radius/2, super.getY() - radius/2, radius, radius);
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);
     }
 
-    public int getX(){
-        return centerX;
-    }
-
-    public int getY(){
-        return centerY;
-    }
 ////hold up this needs editing.
     public void move(){
         int xVal = getX();
