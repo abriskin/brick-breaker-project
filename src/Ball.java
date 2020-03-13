@@ -4,7 +4,7 @@ public class Ball extends GameObject{
     private int radius;
     private int direction, velocity;
     public Ball(int x, int y, int round) {
-        super(Color.DARK_GRAY, x, y);
+        super(x, y);
         radius = 10;
         direction = 0;
         velocity = 5 * round + 10;

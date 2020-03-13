@@ -3,8 +3,8 @@ import java.awt.*;
 public class Rectangle extends GameObject{
     private int width, height;
 
-    public Rectangle(Color c, int x, int y, int w, int h) {
-        super(c, x, y);
+    public Rectangle(int x, int y, int w, int h) {
+        super(x, y);
         width = w;
         height = h;
     }

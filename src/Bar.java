@@ -4,7 +4,7 @@ public class Bar extends Rectangle{
     private int direction, velocity;
  // move left and move right methods needed
     public Bar(int x, int y, int rounds) {
-        super(Color.RED, x, y, 100, 20);
+        super(x, y, 100, 20);
         direction = 0;
         velocity = 0;
     }

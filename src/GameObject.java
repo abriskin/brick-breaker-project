@@ -6,9 +6,10 @@ public abstract class GameObject {
     private Color color;
     private boolean filled;
     private static int panelWidth = 600; //All enemies will share this information
+    Color[] colorList = new Color[]{Color.RED, Color.ORANGE, Color.YELLOW,
+            Color.GREEN, Color.BLUE, Color.MAGENTA, Color.CYAN};
 
-    public GameObject(Color c, int x, int y) {
-        color = c;
+    public GameObject(int x, int y) {
         centerX = x;
         centerY = y;
         filled = true;
@@ -36,6 +37,14 @@ public abstract class GameObject {
 
     public Color getColor(){
         return color;
+    }
+    private void changeColor() {
+        int index =0;
+        for(int i = 0; i < colorList.length; i++) {
+            if (colorList[i] == color)
+                index = i;
+        }
+        color = colorList[index+1];
     }
 
     public int getPanelWidth(){

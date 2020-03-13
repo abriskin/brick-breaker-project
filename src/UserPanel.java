@@ -20,20 +20,10 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private BufferedImage heart;
     private int lives, points, mouseX, mouseY;
     private static int rounds = 0;
+    private int highScore = 0;
     Timer timer;
-    Color[] colorList = new Color[]{Color.RED, Color.BLUE, Color.GREEN, Color.CYAN,
-            Color.PINK, Color.YELLOW};
 
-    private Color[] pickColors() {
-        int colorNum = (int) (Math.random() * colorList.length);
-        int colorNum1 = colorNum;
-        while (colorNum1 == colorNum)
-            colorNum1 = (int) (Math.random() * colorList.length);
-        Color[] returnArray = new Color[]{colorList[colorNum], colorList[colorNum1]};
-        return returnArray;
-    }
-
-    public UserPanel (int width, int length) {
+    public UserPanel(int width, int length) {
         ball = new Ball(300, 400, rounds);
         bar = new Bar(300, 425, rounds);
         BrickList = new ArrayList<Brick>();
@@ -75,16 +65,15 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         for (Brick b : BrickList) {
             b.draw(g);
-        }
+        }x
         for (int i = 0; i < lives; i++) {
-            g.drawImage(heart, 550 + i * 10, 10, null);
+            g.drawImage(scale(heart, 20, 20), 530 + i * 25, 10, null);
         }
         ball.draw(g);
         bar.draw(g);
-        ball.draw();
-        bar.draw();
         if (!(running == GameState.PLAYING))
             g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
                             "bar using the mouse or left and rihgt keys. Loser.", 200,
@@ -107,9 +96,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void startGame() {
         rounds++;
-        Color[] c = pickColors();
-        for(int i  = 0; i < BrickList.size(); i++) {
-            BrickList.add(new Brick(c[i % 2], mouseX, mouseY, rounds));
+        for (int i = 0; i < BrickList.size(); i++) {
+            BrickList.add(new Brick(mouseX, mouseY, rounds));
         }
         timer.start();
         lives = 3;
@@ -141,9 +129,9 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public String getHighScore() {
-        //todo: get high score
-        String highScore = " ";
-        return highScore;
+        if (points > highScore)
+            highScore = points;
+        return "The highest score in this iteration was " + highScore;
     }
 
     public void stopGame() {
@@ -163,6 +151,28 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         mouseX = e.getX();
         mouseY = e.getY();
     }
+
+    //i literally don't know what this method does but i copy and
+    //pasted it from stackoverflow and it works
+    public static BufferedImage scale(BufferedImage heart, int w, int h) {
+        BufferedImage img =
+                new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        int x, y;
+        int ww = heart.getWidth();
+        int hh = heart.getHeight();
+        int[] ys = new int[h];
+        for (y = 0; y < h; y++)
+            ys[y] = y * hh / h;
+        for (x = 0; x < w; x++) {
+            int newX = x * ww / w;
+            for (y = 0; y < h; y++) {
+                int col = heart.getRGB(newX, ys[y]);
+                img.setRGB(x, y, col);
+            }
+        }
+        return img;
+    }
+
 
     public void setDisplay(GameStats d) {
         //todo: figure out
@@ -191,5 +201,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void keyReleased(KeyEvent e) {
     }
+
+    //todo: add some way of telling when the ball hits a brick;
+    //todo: add some way of telling when the ball hits the bar;
 
 }
