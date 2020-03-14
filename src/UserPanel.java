@@ -37,6 +37,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addMouseMotionListener(this);
         addKeyListener(this);
         timer = new Timer(500, this);
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -74,6 +75,11 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         }
         ball.draw(g);
         bar.draw(g);
+
+        for(int i  = 0; i < BrickList.size(); i++) {
+            BrickList.get(i).draw(g);
+        }
+
         if (!(running == GameState.PLAYING))
             g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
                             "bar using the mouse or left and rihgt keys. Loser.", 200,
@@ -87,7 +93,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void mouseMoved(MouseEvent e) {
-        bar.moveToMouse(mouseX, mouseY);
+        bar.moveToMouse(mouseX);
     }
 
     public GameState isRunning() {
@@ -96,9 +102,11 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void startGame() {
         rounds++;
-        for (int i = 0; i < BrickList.size(); i++) {
-            BrickList.add(new Brick(mouseX, mouseY, rounds));
+        //Color[] c = pickColors();c[i % 2]
+        for(int i  = 0; i < BrickList.size(); i++) {
+            BrickList.add(new Brick(Color.BLUE, 70*i, 200 + 25 * i, rounds));
         }
+
         timer.start();
         lives = 3;
         points = 0;

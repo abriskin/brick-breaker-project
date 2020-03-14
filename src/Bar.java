@@ -42,14 +42,15 @@ public class Bar extends Rectangle{
         super.setX(xVal);
     }
 
-    public void moveToMouse(int x, int y) {
+    public void moveToMouse(int x) {
+        super.setX(x);
     }
 
     public void  moveRight(){
-
+        super.addToX(20);
     }
 
     public void moveLeft(){
-
+        super.addToX(-20);
     }
 }

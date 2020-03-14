@@ -25,6 +25,9 @@ public abstract class GameObject {
         return centerX;
     }
 
+    public void addToX(int x){
+        centerX += x;
+    }
     public void setX(int x) {
         centerX = x;
     }
