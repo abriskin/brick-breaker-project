@@ -52,6 +52,12 @@ public class Ball extends GameObject{
             else
                 yVal+= velocity;
         }
+        else if(yVal -radius > 450){
+            yVal = 400;
+            xVal = 300;
+            xDirection = 0;
+            yDirection = 1;
+        }
         else
         {
             if(xDirection == 1)
