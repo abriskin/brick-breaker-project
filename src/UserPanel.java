@@ -17,6 +17,7 @@ import static java.awt.event.KeyEvent.*;
 public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         MouseMotionListener, ActionListener, KeyListener {
 
+    private boolean win;
     private GameState running;
     private ArrayList<Brick> BrickList;
     private Ball ball;
@@ -71,25 +72,31 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (Brick b : BrickList) {
-            b.draw(g);
+        if (win) {
+            g.setColor(Color.BLACK);
+            g.fillRect(0,0,1000,1000);
+            g.setColor(Color.WHITE);
+            g.drawString("YOU WIN",  200, 200);
         }
-        for (int i = 0; i < lives; i++) {
-            g.drawImage(scale(heart, 20, 20), 530 + i * 25, 10, null);
-        }
-        ball.draw(g);
-        bar.draw(g);
+        else {
+            for (Brick b : BrickList) {
+                b.draw(g);
+            }
+            for (int i = 0; i < lives; i++) {
+                g.drawImage(scale(heart, 20, 20), 530 + i * 25, 10, null);
+            }
+            ball.draw(g);
+            bar.draw(g);
 
-        for(int i  = 0; i < BrickList.size(); i++) {
-            if(BrickList.get(i).getTimesHit() <= 1)
+            for (int i = 0; i < BrickList.size(); i++) {
                 BrickList.get(i).draw(g);
+            }
+
+            if (!(running == GameState.PLAYING))
+                g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
+                                "bar using the mouse or left and rihgt keys. Loser.", 200,
+                        300);
         }
-
-        if (!(running == GameState.PLAYING))
-            g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
-                            "bar using the mouse or left and rihgt keys. Loser.", 200,
-                    300);
-
     }
 
     //changes coordinates of ball so that next time the screen is repainted,
@@ -97,23 +104,26 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void checkStats() {
         /*if(didItHitBrick())
             Brick b = findHitBrick();*/
-        ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar);
-        ball.changeColor();
-        for (Brick b: BrickList) {
-            b.changeColor();
+        if (BrickList.size() == 0)
+            win = true;
+        else {
+            ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar);
+            ball.changeColor();
+            for (Brick b : BrickList) {
+                b.changeColor();
+            }
+            bar.changeColor();
         }
-        bar.changeColor();
 
     }
     private boolean didItHitBrick(){
         for(int i = 0; i < BrickList.size(); i++){ // did it hit a brick, and so if it did times hit will go up
             // checks if it's in both ranges
             // if true breaks out and does other stuff
-            if(BrickList.get(i).getTimesHit() <= 1) {
-                if (hit(ball, BrickList.get(i))) {
-                    BrickList.get(i).wasHit();
-                    return true;
-                }
+            if (hit(ball, BrickList.get(i))) {
+                if (BrickList.get(i).wasHit() > 1)
+                    BrickList.remove(i);
+                return true;
             }
         }
         return false;
@@ -177,6 +187,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void startGame() {
+        win = false;
         lives = 3;
         ball.reset();
         bar.reset();

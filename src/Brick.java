@@ -9,8 +9,9 @@ public class Brick extends MyRectangle {
         velocity = 3;
     }
 
-    public void wasHit(){
+    public int wasHit(){
         timesHit++;
+        return timesHit;
     }
 
     public int getTimesHit(){
