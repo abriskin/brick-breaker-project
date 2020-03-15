@@ -32,7 +32,7 @@ public interface JavaArcade {
     public String getCredits();
 
     /* This method should return the highest score played for this game */
-    public String getHighScore();
+    public int getHighScore();
 
     /* This method should stop the timers, reset the score, and set a running boolean value to false */
     public void stopGame();
@@ -44,5 +44,6 @@ public interface JavaArcade {
     /* This method provides access to GameStats display for UserPanel to pass information to update score
     GameStats is created in Arcade, a reference should be passed to UserPanel (main panel) to update points */
     public void setDisplay(GameStats d);
+    //i think this method is supposed to like update stuff in d?? specifically points???
 
 }

@@ -23,18 +23,20 @@ public class ControlPanel extends JPanel
         instructionsButton = new JButton("Instructions");
         instructionsButton.addActionListener(this);
         add(instructionsButton);
+
         add(Box.createHorizontalStrut(80));
         startButton = new JButton("Start");
         startButton.addActionListener(this);
-
         add(startButton);
 
         pauseButton = new JButton("Pause");
         pauseButton.addActionListener(this);
         add(pauseButton);
+
         stopButton = new JButton("Stop");
         stopButton.addActionListener(this);
         add(stopButton);
+
         add(Box.createHorizontalStrut(80));
         creditsButton = new JButton("Credits");
         creditsButton.addActionListener(this);
@@ -49,9 +51,7 @@ public class ControlPanel extends JPanel
         JButton button = (JButton) e.getSource();
 
         if (button == startButton) {
-
             if (!(game.isRunning() == GameState.PLAYING)) {
-
                 ((JPanel) (game)).requestFocus(); //need to provide the JPanel focus
                 game.startGame();
                 gStats.update(0);
@@ -62,7 +62,6 @@ public class ControlPanel extends JPanel
             startButton.setText("Resume");
             startButton.setEnabled(true);
             repaint();
-
         } else if (button == stopButton) {
             game.stopGame();
             gStats.gameOver(game.getPoints());

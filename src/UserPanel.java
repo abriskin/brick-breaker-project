@@ -39,7 +39,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addMouseMotionListener(this);
         addKeyListener(this);
         timer = new Timer(100, this);
-        lives = 3;
 
     }
 
@@ -105,11 +104,13 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void startGame() {
-        rounds++;
-        //Color[] c = pickColors();c[i % 2]
+        lives = 3;
+        ball.setXY(350, 400);
+        bar.setXY(350, 425);
+        //todo: change ball & bar to starting positions
         for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
-                BrickList.add(new Brick(100 + 100*a, 100 + 50 * i, rounds));
+                BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
             }
         }
 
@@ -142,10 +143,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return "adi briskin & jessica liao";
     }
 
-    public String getHighScore() {
+    public int getHighScore() {
         int highScore = 0;
         try {
-            Scanner fileReader = new Scanner(new File("highscores.txt"));
+            Scanner fileReader = new Scanner(new File("C:\\Users\\" +
+                    "jessi\\IdeaProjects\\brick-breaker-project\\src\\" +
+                    "highscores.txt"));
             highScore = fileReader.nextInt();
             fileReader.close();
             if (highScore > points) {
@@ -158,11 +161,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             System.out.println("file not found");
         }
 
-        return "The highest score in this iteration was " + highScore;
+        return highScore;
     }
 
     public void stopGame() {
         timer.stop();
+        points = 0;
         running = GameState.STOPPED;
     }
 
@@ -207,6 +211,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void setDisplay(GameStats d) {
         //todo: figure out
+        d.update(points);
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -232,8 +237,5 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void keyReleased(KeyEvent e) {
     }
-
-    //todo: add some way of telling when the ball hits a brick;
-    //todo: add some way of telling when the ball hits the bar;
 
 }

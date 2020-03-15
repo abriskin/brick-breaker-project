@@ -10,7 +10,7 @@ public class GameStats extends JPanel {
     private JLabel yourScoreText;
     private JavaArcade game;
 
-    // Constructor
+    //Constructor
     public GameStats(JavaArcade t) {
         super(new GridLayout(2, 4, 10, 0));
         setBorder(new EmptyBorder(0, 0, 5, 0));
@@ -32,17 +32,12 @@ public class GameStats extends JPanel {
 
     }
 
-
     public void update(int points) {
-
-        yourScoreText.setText(" Your Score: " + points);
-
-
+        yourScoreText.setText("Your Score: " + points);
     }
 
     public void gameOver(int points) {
-
-        if (points > Integer.parseInt(game.getHighScore())) {
+        if (points > game.getHighScore()) {
             yourScoreText.setForeground(Color.BLUE);
             String s = (String) JOptionPane.showInputDialog(this, "You are the new high scorer. Congratulations!\n Enter your name: ", "High Score", JOptionPane.PLAIN_MESSAGE, null, null, "name");
         }

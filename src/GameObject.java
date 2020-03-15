@@ -35,6 +35,10 @@ public abstract class GameObject {
     public void setY(int y){
         centerY = y;
     }
+    public void setXY(int x, int y) {
+        centerX = x;
+        centerY = y;
+    }
     public int getY(){
         return centerY;
     }

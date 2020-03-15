@@ -2,10 +2,10 @@ import java.awt.*;
 
 public class Brick extends Rectangle {
     private int direction, velocity, timesHit;
-    public Brick(int x, int y, int roundNum) {
+    public Brick(int x, int y) {
         super(x, y, 60, 30);
         direction = 0;
-        velocity = 3 * roundNum;
+        velocity = 3;
     }
 
     public void wasHit(){
