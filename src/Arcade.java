@@ -1,19 +1,15 @@
-import java.awt.Container;
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
 public class Arcade extends JFrame {
     public Arcade() {
+
         super("AP Java Arcade");
-
         JavaArcade game = new UserPanel(600, 450);
-
         GameStats display = new GameStats(game); //passing in a JavaArcade, therefore I know I can call getHighScore(), getScore()
-
         ControlPanel controls = new ControlPanel(game, display); //Also passing in JavaArcade to ControlPanel, I know you will respond to buttons
-
         game.setDisplay(display); //provides game ability to update display
 
         JPanel panel = new JPanel();

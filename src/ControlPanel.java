@@ -1,22 +1,21 @@
 // Represents a control panel for the arcade
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import java.awt.Component;
-import java.awt.Container;
 import javax.swing.Box;
 import javax.swing.*;
 
-public class ControlPanel extends JPanel
-        implements ActionListener {
+public class ControlPanel extends JPanel implements ActionListener {
     private JavaArcade game;
     private GameStats gStats;
     private JButton startButton, pauseButton, stopButton, instructionsButton, creditsButton;
 
     // Constructor
     public ControlPanel(JavaArcade t, GameStats g) {
+
         game = t;
         gStats = g;
 
@@ -41,7 +40,6 @@ public class ControlPanel extends JPanel
         creditsButton = new JButton("Credits");
         creditsButton.addActionListener(this);
         add(creditsButton);
-
 
     }
 

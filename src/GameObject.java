@@ -46,21 +46,9 @@ public abstract class GameObject {
     public Color getColor(){
         return color;
     }
-    private void changeColor() {
-        int index =0;
-        for(int i = 0; i < colorList.length; i++) {
-            if (colorList[i] == color)
-                index = i;
-        }
-        color = colorList[index+1];
-    }
-    public Color returnNewColor(){
-        int index =0;
-        for(int i = 0; i < colorList.length; i++) {
-            if (colorList[i] == color)
-                index = i;
-        }
-        return colorList[index+1];
+
+    public  void changeColor() {
+        color = colorList[(int) (Math.random() * colorList.length)];
     }
 
     public int getPanelWidth(){

@@ -27,8 +27,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     Timer timer;
 
     public UserPanel(int width, int length) {
-        bar = new Bar(300, 400);
-        ball = new Ball(300, 425);
+        bar = new Bar(300, 425);
+        ball = new Ball(300, 400);
         BrickList = new ArrayList<Brick>();
         try {
             heart = ImageIO.read(new File("uglyheart.jpg"));
@@ -95,6 +95,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         /*if(didItHitBrick())
             Brick b = findHitBrick();*/
         ball.move(didItHitBrick(), didItHitBar(), BrickList.get(0), bar);
+        ball.changeColor();
+        for (Brick b: BrickList) {
+            b.changeColor();
+        }
+        bar.changeColor();
+
     }
     private boolean didItHitBrick(){
         for(int i = 0; i < BrickList.size(); i++){ // did it hit a brick, and so if it did times hit will go up
@@ -151,6 +157,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return running;
     }
 
+    //todo: make it actually restart? eveyrthing? when restart utton pressed bc currentlyit does Not
     public void startGame() {
         lives = 3;
         ball.reset();
@@ -214,6 +221,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         timer.stop();
         points = 0;
         running = GameState.STOPPED;
+        endGameSequence();
     }
 
     public int getPoints() {
@@ -222,6 +230,13 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void subtractLife() {
         lives--;
+        if (lives == 0) {
+            endGameSequence();
+        }
+    }
+
+    public void endGameSequence() {
+        //todo: add words that say "game over" or something;
     }
 
     public void updateMouseCoordinates(MouseEvent e) {
@@ -251,7 +266,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void setDisplay(GameStats d) {
-        //todo: figure out
         d.update(points);
     }
 

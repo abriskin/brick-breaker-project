@@ -28,10 +28,7 @@ public class Ball extends GameObject {
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);
     }
-    /*public boolean isDead(){
-        return died;
-    }
-*/
+
     public int getRadius() {
         return radius;
     }
