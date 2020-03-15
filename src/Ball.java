@@ -7,7 +7,7 @@ public class Ball extends GameObject{
         super(x, y);
         radius = 10;
         xDirection = 0;
-        yDirection = 0;
+        yDirection = 1;
         velocity = 5 * round + 10;
     }
 
@@ -28,22 +28,44 @@ public class Ball extends GameObject{
         if(xVal + radius > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
             xDirection=0; //negative;
             xVal-=velocity;
-            //if()//TODO fill in the y coordinates and values so that they change accordinly.
+            if(yDirection == 0)
+                yVal += velocity;
+            else
+                yVal -= velocity;
+
         }
         else if(xVal - radius < 0){
 
             xVal+=velocity;
             xDirection = 1; //positive
+            if(yDirection == 0)
+                yVal += velocity;
+            else
+                yVal -= velocity;
+
+        }
+        else if(yVal -radius < 0){
+            yDirection = 0;
+            yVal += velocity;
+            if(xDirection == 0)
+                yVal -= velocity;
+            else
+                yVal+= velocity;
         }
         else
         {
-            if(xDirection >= 1)
+            if(xDirection == 1)
                 xVal+=velocity;
             else
                 xVal-=velocity;
+
+            if(yDirection == 0)
+                yVal += velocity;
+            else
+                yVal -= velocity;
         }
         super.setX(xVal);
-
+        super.setY(yVal);
     }
 
 }
