@@ -1,9 +1,9 @@
 import java.awt.*;
 
-public class Rectangle extends GameObject{
+public class MyRectangle extends GameObject{
     private int width, height;
 
-    public Rectangle(int x, int y, int w, int h) {
+    public MyRectangle(int x, int y, int w, int h) {
         super(x, y);
         width = w;
         height = h;

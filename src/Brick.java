@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Brick extends Rectangle {
+public class Brick extends MyRectangle {
     private int direction, velocity, timesHit;
     public Brick(int x, int y) {
         super(x, y, 60, 30);
@@ -33,6 +33,8 @@ public class Brick extends Rectangle {
             if (super.isFilled()) {
                 g.fillRect(super.getX() - super.getWidth() / 2, super.getY() - super.getHeight() / 2, super.getWidth(), super.getHeight());
                 g.drawLine(super.getX() - super.getWidth() / 2, super.getY() - super.getHeight() / 2,super.getX() - super.getWidth(), super.getY() - super.getHeight());
+                g.drawLine(super.getX(), super.getY(),super.getX() - 30, super.getY() + 40);
+                g.drawLine(super.getX() + super.getWidth(), super.getY() + super.getHeight(),super.getX() +60, super.getY() + 25);
             }
             /*else
                 g.drawRect(centerX - width/2, centerY - height/2, width, height);*/

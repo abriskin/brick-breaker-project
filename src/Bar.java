@@ -1,9 +1,9 @@
 import java.awt.*;
 
-public class Bar extends Rectangle{
+public class Bar extends MyRectangle{
     private int direction, velocity;
  // move left and move right methods needed
-    public Bar(int x, int y, int rounds) {
+    public Bar(int x, int y) {
         super(x, y, 100, 20);
         direction = 0;
         velocity = 0;

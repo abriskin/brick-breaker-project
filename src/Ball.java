@@ -6,7 +6,7 @@ public class Ball extends GameObject {
 
     public Ball(int x, int y) {
         super(x, y);
-        radius = 10;
+        radius = 10; // Note, the radius is actually a diameter
         xDirection = 0;
         yDirection = 1;
         velocity = 15;
@@ -27,6 +27,13 @@ public class Ball extends GameObject {
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);
+    }
+    /*public boolean isDead(){
+        return died;
+    }
+*/
+    public int getRadius() {
+        return radius;
     }
 
     ////hold up this needs editing.
@@ -70,10 +77,32 @@ public class Ball extends GameObject {
             if (yDirection == 0)
                 yVal += velocity;
             else
-                yVal -= velocity;
+                yVal += velocity;
+
         }
         super.setX(xVal);
         super.setY(yVal);
+    }
+
+    public void move(boolean hitBrick, boolean hitBar, MyRectangle r, Bar b){
+        int xVal = 0;
+        int yVal = 0;
+        if(hitBrick){
+
+        }
+        else if(hitBar){
+            //w = 100;
+            xVal += Math.abs(super.getX() - b.getX() + 100);
+           //if(yDirection == 0)
+                yDirection = 1;
+           /* else
+                yDirection = 0;*/
+            yVal += velocity;
+            super.setX(xVal);
+            super.setY(yVal);
+        }
+        else
+            move();
     }
 
 }

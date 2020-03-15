@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -25,7 +27,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     Timer timer;
 
     public UserPanel(int width, int length) {
-        ball = new Ball(300, 400);
+        bar = new Bar(300, 400);
+        ball = new Ball(300, 425);
         BrickList = new ArrayList<Brick>();
         try {
             heart = ImageIO.read(new File("uglyheart.jpg"));
@@ -89,11 +92,58 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     //changes coordinates of ball so that next time the screen is repainted,
     //the ball will be drawn in that new place
     public void checkStats() {
-        ball.move();
+        /*if(didItHitBrick())
+            Brick b = findHitBrick();*/
+        ball.move(didItHitBrick(), didItHitBar(), BrickList.get(0), bar);
+    }
+    private boolean didItHitBrick(){
+        for(int i = 0; i < BrickList.size(); i++){ // did it hit a brick, and so if it did times hit will go up
+            // checks if it's in both ranges
+            // if true breaks out and does other stuff
+            if(hit(ball, BrickList.get(i))){
+                BrickList.get(i).wasHit();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Brick findHitBrick(){
+        for(int i = 0; i < BrickList.size(); i++){
+            if(hit(ball, BrickList.get(i))){
+                return BrickList.get(i);
+            }
+        }
+        return BrickList.get(0);
+    }
+
+    /*private int whereHit(){
+
+    }*/
+
+    private boolean didItHitBar(){
+            // did it hit a brick, and so if it did times hit will go up
+            // checks if it's in both ranges
+            // if true breaks out and does other stuff
+        if(hit(ball, bar)){
+            return true;
+        }
+        return false;
+
+    }
+
+    private boolean hit(Ball b, MyRectangle r){
+
+        for(int i = 0; i <=b.getRadius(); i++){
+            if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i >= r.getY()
+                    && b.getY() + i <= r.getY() + r.getHeight())
+                return true;
+        }
+        return false;
+
     }
 
     public void mouseMoved(MouseEvent e) {
-        //bar.moveToMouse(mouseX);
         bar.moveToMouse(e.getX());
     }
 

@@ -1,5 +1,3 @@
-import javafx.scene.layout.BackgroundRepeat;
-
 import java.awt.*;
 
 public abstract class GameObject {
@@ -71,6 +69,5 @@ public abstract class GameObject {
 
     public abstract void move();
     public abstract void draw(Graphics g);
-
 
 }
