@@ -22,7 +22,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private Ball ball;
     private Bar bar;
     private BufferedImage heart;
-    private int lives, points, mouseX, mouseY;
+    private int points, mouseX, mouseY;
+    private static int lives;
     private int highScore = 0;
     Timer timer;
 
@@ -80,7 +81,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         bar.draw(g);
 
         for(int i  = 0; i < BrickList.size(); i++) {
-            BrickList.get(i).draw(g);
+            if(BrickList.get(i).getTimesHit() <= 1)
+                BrickList.get(i).draw(g);
         }
 
         if (!(running == GameState.PLAYING))
@@ -94,7 +96,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void checkStats() {
         /*if(didItHitBrick())
             Brick b = findHitBrick();*/
-        ball.move(didItHitBrick(), didItHitBar(), BrickList.get(0), bar);
+        ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar);
         ball.changeColor();
         for (Brick b: BrickList) {
             b.changeColor();
@@ -106,9 +108,11 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         for(int i = 0; i < BrickList.size(); i++){ // did it hit a brick, and so if it did times hit will go up
             // checks if it's in both ranges
             // if true breaks out and does other stuff
-            if(hit(ball, BrickList.get(i))){
-                BrickList.get(i).wasHit();
-                return true;
+            if(BrickList.get(i).getTimesHit() <= 1) {
+                if (hit(ball, BrickList.get(i))) {
+                    BrickList.get(i).wasHit();
+                    return true;
+                }
             }
         }
         return false;
@@ -123,9 +127,24 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return BrickList.get(0);
     }
 
-    /*private int whereHit(){
+    private int whereHit(Ball b, MyRectangle r){
+        for(int i = 0; i <=b.getRadius(); i++){
+            if(b.getX()+i == r.getX() && b.getY() + i >= r.getY() && b.getY() + i <= r.getY() + r.getHeight())
+                return 1;
+            else if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i == r.getY()){
+                return 2;
+            }
+            else if(b.getX() + i == r.getX() + r.getWidth() && b.getY() + i >= r.getY()
+                    && b.getY() + i <= r.getY() + r.getHeight()){
+                return 3;
+            }
+            else if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i == r.getY() + r.getHeight()){
+                return 4;
+            }
 
-    }*/
+        }
+        return 0;
+    }
 
     private boolean didItHitBar(){
             // did it hit a brick, and so if it did times hit will go up
@@ -228,14 +247,14 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return points;
     }
 
-    public void subtractLife() {
+    public static void subtractLife() {
         lives--;
         if (lives == 0) {
             endGameSequence();
         }
     }
 
-    public void endGameSequence() {
+    public static void endGameSequence() {
         //todo: add words that say "game over" or something;
     }
 

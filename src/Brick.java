@@ -12,6 +12,10 @@ public class Brick extends MyRectangle {
         timesHit++;
     }
 
+    public int getTimesHit(){
+        return timesHit;
+    }
+
     public void draw(Graphics g) {
         g.setColor(super.getColor());
         if(timesHit == 0) {

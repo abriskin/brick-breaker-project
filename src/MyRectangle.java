@@ -27,7 +27,7 @@ public class MyRectangle extends GameObject{
     public int getHeight() {
         return height;
     }
-    public void move(){
+    public void move(int x){
     }
 
 }

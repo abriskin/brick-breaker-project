@@ -13,7 +13,7 @@ public class Ball extends GameObject {
     }
 
     public void reset() {
-        setXY(350, 425);
+        setXY(300, 400);
         velocity = 15;
         xDirection = 0;
         yDirection = 1;
@@ -34,10 +34,10 @@ public class Ball extends GameObject {
     }
 
     ////hold up this needs editing.
-    public void move() {
+    public void move(int where) {
         int xVal = getX();
         int yVal = getY();
-        if (xVal + radius > super.getPanelWidth()) {  //include getWidth() so we bounce off on the right edge
+        if (xVal + radius > super.getPanelWidth() || where == 1) {  //include getWidth() so we bounce off on the right edge
             xDirection = 0; //negative;
             xVal -= velocity;
             if (yDirection == 0)
@@ -45,7 +45,7 @@ public class Ball extends GameObject {
             else
                 yVal -= velocity;
 
-        } else if (xVal - radius < 0) {
+        } else if (xVal - radius < 0 || where == 3){
             xVal += velocity;
             xDirection = 1; //positive
             if (yDirection == 0)
@@ -53,19 +53,27 @@ public class Ball extends GameObject {
             else
                 yVal -= velocity;
 
-        } else if (yVal - radius < 0) {
-            yDirection = 0;
+        } else if (yVal - radius < 0||where == 4) {
+            yDirection = 1;
             yVal += velocity;
             if (xDirection == 0)
-                yVal -= velocity;
+                xVal -= velocity;
             else
-                yVal += velocity;
+                xVal += velocity;
         } else if (yVal - radius > 450) {
             yVal = 400;
             xVal = 350;
             xDirection = 0;
             yDirection = 1;
-        } else {
+            UserPanel.subtractLife();
+        } else if (where == 2){
+            yDirection = 0;
+            yVal -= velocity;
+            if(xDirection == 0)
+                xVal -= velocity;
+            else
+                xVal += velocity;
+        }else{
             if (xDirection == 1)
                 xVal += velocity;
             else
@@ -81,17 +89,17 @@ public class Ball extends GameObject {
         super.setY(yVal);
     }
 
-    public void move(boolean hitBrick, boolean hitBar, MyRectangle r, Bar b){
+    public void move(boolean hitBrick, boolean hitBar, int where, Bar b){
         int xVal = 0;
         int yVal = 0;
         if(hitBrick){
-
+            move(where);
         }
         else if(hitBar){
             //w = 100;
             xVal += Math.abs(super.getX() - b.getX() + 100);
            //if(yDirection == 0)
-                yDirection = 1;
+                yDirection = 0;
            /* else
                 yDirection = 0;*/
             yVal += velocity;
@@ -99,7 +107,7 @@ public class Ball extends GameObject {
             super.setY(yVal);
         }
         else
-            move();
+            move(0);
     }
 
 }

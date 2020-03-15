@@ -21,7 +21,7 @@ public class Bar extends MyRectangle{
     }
 
     ////????????????????Am I doing a move? Not doing a move?
-   public void move(){
+   /*public void move(){
         int xVal = super.getX();
         if(xVal + super.getWidth() > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
             direction=0; //negative;
@@ -40,10 +40,10 @@ public class Bar extends MyRectangle{
                 xVal-=velocity;
         }
         super.setX(xVal);
-    }
+    }*/
 
     public void reset() {
-        setXY(350, 400);
+        setXY(350, 425);
     }
 
     public void moveToMouse(int x) {
