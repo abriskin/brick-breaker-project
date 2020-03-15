@@ -2,6 +2,7 @@ import java.awt.*;
 
 public abstract class GameObject {
 
+    private static int shorterTimer;
     private int centerX, centerY;
     private Color color;
     private boolean filled;
@@ -47,8 +48,10 @@ public abstract class GameObject {
         return color;
     }
 
-    public  void changeColor() {
-        color = colorList[(int) (Math.random() * colorList.length)];
+    public void changeColor() {
+        shorterTimer++;
+        if (shorterTimer % 20 == 0)
+            color = colorList[(int) (Math.random() * colorList.length)];
     }
 
     public int getPanelWidth(){

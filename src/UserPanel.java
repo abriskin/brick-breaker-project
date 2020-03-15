@@ -40,8 +40,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
-        timer = new Timer(100, this);
-
+        timer = new Timer(40, this);
 
     }
 
@@ -131,7 +130,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     private int whereHit(Ball b, MyRectangle r){
         for(int i = 0; i <=b.getRadius(); i++){
-            if(b.getX()+i == r.getX() && b.getY() + i >= r.getY() && b.getY() + i <= r.getY() + r.getHeight())
+            if(b.getX()+i == r.getX()-r.getWidth()/2 && b.getY() + i >= r.getY() && b.getY() + i <= r.getY() + r.getHeight())
                 return 1;
             else if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i == r.getY()){
                 return 2;
@@ -154,7 +153,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return false;
     }
 
-    private void addToPoint(){
+    private void addPoint(){
         points++;
     }
 
@@ -162,7 +161,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         for(int i = 0; i <=b.getRadius(); i++){
             if(b.getX()+ i >= r.getX() - (r.getWidth()/2) && b.getX() + i <= r.getX() + r.getWidth()/2
                     && b.getY() + i >= r.getY()  - (r.getHeight()/2) && b.getY() + i <= r.getY() + r.getHeight()/2 ){
-                addToPoint();
+                addPoint();
                 return true;
             }
         }
@@ -177,16 +176,16 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return running;
     }
 
-    //todo: make it actually restart? eveyrthing? when restart utton pressed bc currently it does Not
     public void startGame() {
         lives = 3;
         ball.reset();
         bar.reset();
-        for(int i  = 0; i < 5; i++) {
+        BrickList.add(new Brick(100 + 100*3, 100 + 150));
+        /*for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
                 BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
             }
-        }
+        }*/
         timer.start();
         lives = 3;
         points = 0;

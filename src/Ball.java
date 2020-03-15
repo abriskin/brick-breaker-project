@@ -6,15 +6,15 @@ public class Ball extends GameObject {
 
     public Ball(int x, int y) {
         super(x, y);
-        radius = 10; // Note, the radius is actually a diameter
+        radius = 100; // Note, the radius is actually a diameter
         xDirection = 0;
         yDirection = 1;
-        velocity = 15;
+        velocity = 3;
     }
 
     public void reset() {
         setXY(300, 400);
-        velocity = 15;
+        velocity = 3;
         xDirection = 0;
         yDirection = 0;
     }
@@ -30,7 +30,7 @@ public class Ball extends GameObject {
     }
 
     public int getRadius() {
-        return radius;
+        return radius/2;
     }
 
     ////hold up this needs editing.
@@ -92,7 +92,7 @@ public class Ball extends GameObject {
     public void move(boolean hitBrick, boolean hitBar, int where, Bar b){
         int xVal = super.getX();
         int yVal = super.getY(); // TODO: change it back to getX and getY
-        if(hitBrick){
+        if (hitBrick){
             move(where);
         }
         else if(hitBar){
