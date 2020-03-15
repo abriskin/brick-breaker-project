@@ -141,28 +141,37 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             else if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i == r.getY() + r.getHeight()){
                 return 4;
             }
-
         }
         return 0;
     }
 
     private boolean didItHitBar(){
-            // did it hit a brick, and so if it did times hit will go up
-            // checks if it's in both ranges
-            // if true breaks out and does other stuff
         if(hit(ball, bar)){
             return true;
         }
         return false;
+    }
 
+    private void addToPoint(){
+        points++;
     }
 
     private boolean hit(Ball b, MyRectangle r){
 
-        for(int i = 0; i <=b.getRadius(); i++){
-            if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i >= r.getY()
-                    && b.getY() + i <= r.getY() + r.getHeight())
+        /*for(int i = 0; i <=b.getRadius(); i++){
+            if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth()
+                    && b.getY() + i >= r.getY() && b.getY() + i <= r.getY() + r.getHeight()){
+                addToPoint();
                 return true;
+            }
+        }*/
+
+        for(int i = 0; i <=b.getRadius(); i++){
+            if(b.getX()+ i >= r.getX() - (r.getWidth()/2) && b.getX() + i <= r.getX() + r.getWidth()/2
+                    && b.getY() + i >= r.getY()  - (r.getHeight()/2) && b.getY() + i <= r.getY() + r.getHeight()/2 ){
+                addToPoint();
+                return true;
+            }
         }
         return false;
 
@@ -176,7 +185,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return running;
     }
 
-    //todo: make it actually restart? eveyrthing? when restart utton pressed bc currentlyit does Not
+    //todo: make it actually restart? eveyrthing? when restart utton pressed bc currently it does Not
     public void startGame() {
         lives = 3;
         ball.reset();

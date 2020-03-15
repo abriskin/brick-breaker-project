@@ -16,7 +16,7 @@ public class Ball extends GameObject {
         setXY(300, 400);
         velocity = 15;
         xDirection = 0;
-        yDirection = 1;
+        yDirection = 0;
     }
 
     public void draw(Graphics g) { // need to draw them in the right coordinates
@@ -90,21 +90,23 @@ public class Ball extends GameObject {
     }
 
     public void move(boolean hitBrick, boolean hitBar, int where, Bar b){
-        int xVal = 0;
-        int yVal = 0;
+        int xVal = getX();
+        int yVal = getY();
         if(hitBrick){
             move(where);
         }
         else if(hitBar){
-            //w = 100;
-            xVal += Math.abs(super.getX() - b.getX() + 100);
-           //if(yDirection == 0)
-                yDirection = 0;
-           /* else
-                yDirection = 0;*/
-            yVal += velocity;
+            yDirection = 0;
+            yVal -= velocity;
+            if(xDirection == 0)
+                xVal -= Math.abs(super.getX() - (b.getX() + 100));
+
+            else
+                xVal += Math.abs(super.getX() - (b.getX() + 100));
             super.setX(xVal);
             super.setY(yVal);
+            //move(2);
+
         }
         else
             move(0);
