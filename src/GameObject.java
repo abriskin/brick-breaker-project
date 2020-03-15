@@ -13,6 +13,7 @@ public abstract class GameObject {
         centerX = x;
         centerY = y;
         filled = true;
+        changeColor();
     }
 
     public static void setPanelWidth(int w) {
@@ -48,6 +49,14 @@ public abstract class GameObject {
                 index = i;
         }
         color = colorList[index+1];
+    }
+    public Color returnNewColor(){
+        int index =0;
+        for(int i = 0; i < colorList.length; i++) {
+            if (colorList[i] == color)
+                index = i;
+        }
+        return colorList[index+1];
     }
 
     public int getPanelWidth(){

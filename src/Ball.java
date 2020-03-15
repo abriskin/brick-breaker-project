@@ -2,11 +2,12 @@ import java.awt.*;
 
 public class Ball extends GameObject{
     private int radius;
-    private int direction, velocity;
+    private int velocity, xDirection, yDirection;
     public Ball(int x, int y, int round) {
         super(x, y);
         radius = 10;
-        direction = 0;
+        xDirection = 0;
+        yDirection = 0;
         velocity = 5 * round + 10;
     }
 
@@ -23,20 +24,20 @@ public class Ball extends GameObject{
 ////hold up this needs editing.
     public void move() {
         int xVal = getX();
-
+        int yVal = getY();
         if(xVal + radius > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
-            direction=0; //negative;
+            xDirection=0; //negative;
             xVal-=velocity;
+            //if()//TODO fill in the y coordinates and values so that they change accordinly.
         }
-
         else if(xVal - radius < 0){
 
             xVal+=velocity;
-            direction = 1; //positive
+            xDirection = 1; //positive
         }
         else
         {
-            if(direction == 1)
+            if(xDirection >= 1)
                 xVal+=velocity;
             else
                 xVal-=velocity;

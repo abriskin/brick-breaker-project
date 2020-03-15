@@ -21,8 +21,8 @@ public class Bar extends Rectangle{
     }
 
     ////????????????????Am I doing a move? Not doing a move?
-    public void move(){
-        int xVal = getX();
+   public void move(){
+        int xVal = super.getX();
         if(xVal + super.getWidth() > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
             direction=0; //negative;
             xVal-=velocity;

@@ -36,7 +36,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(this);
-        timer = new Timer(500, this);
+        timer = new Timer(100, this);
+        lives = 3;
 
     }
 
@@ -69,7 +70,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
         for (Brick b : BrickList) {
             b.draw(g);
-        }x
+        }
         for (int i = 0; i < lives; i++) {
             g.drawImage(scale(heart, 20, 20), 530 + i * 25, 10, null);
         }
@@ -93,7 +94,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void mouseMoved(MouseEvent e) {
-        bar.moveToMouse(mouseX);
+        //bar.moveToMouse(mouseX);
+        bar.moveToMouse(e.getX());
     }
 
     public GameState isRunning() {
@@ -103,8 +105,10 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     public void startGame() {
         rounds++;
         //Color[] c = pickColors();c[i % 2]
-        for(int i  = 0; i < BrickList.size(); i++) {
-            BrickList.add(new Brick(Color.BLUE, 70*i, 200 + 25 * i, rounds));
+        for(int i  = 0; i < 5; i++) {
+            for(int a = 0; a < 5; a++) {
+                BrickList.add(new Brick(100 + 100*a, 100 + 50 * i, rounds));
+            }
         }
 
         timer.start();

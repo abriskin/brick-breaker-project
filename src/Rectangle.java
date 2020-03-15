@@ -28,7 +28,6 @@ public class Rectangle extends GameObject{
         return height;
     }
     public void move(){
-
     }
 
 }
