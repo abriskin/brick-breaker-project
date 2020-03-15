@@ -35,8 +35,8 @@ public class Ball extends GameObject {
 
     ////hold up this needs editing.
     public void move(int where) {
-        int xVal = getX();
-        int yVal = getY();
+        int xVal = super.getX();
+        int yVal = super.getY();
         if (xVal + radius > super.getPanelWidth() || where == 1) {  //include getWidth() so we bounce off on the right edge
             xDirection = 0; //negative;
             xVal -= velocity;
@@ -80,7 +80,7 @@ public class Ball extends GameObject {
                 xVal -= velocity;
 
             if (yDirection == 0)
-                yVal += velocity;
+                yVal -= velocity;
             else
                 yVal += velocity;
 
@@ -90,8 +90,8 @@ public class Ball extends GameObject {
     }
 
     public void move(boolean hitBrick, boolean hitBar, int where, Bar b){
-        int xVal = getX();
-        int yVal = getY();
+        int xVal = super.getX();
+        int yVal = super.getY(); // TODO: change it back to getX and getY
         if(hitBrick){
             move(where);
         }
@@ -100,13 +100,10 @@ public class Ball extends GameObject {
             yVal -= velocity;
             if(xDirection == 0)
                 xVal -= Math.abs(super.getX() - (b.getX() + 100));
-
             else
                 xVal += Math.abs(super.getX() - (b.getX() + 100));
             super.setX(xVal);
             super.setY(yVal);
-            //move(2);
-
         }
         else
             move(0);

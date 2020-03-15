@@ -42,6 +42,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addKeyListener(this);
         timer = new Timer(100, this);
 
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -89,6 +90,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
                             "bar using the mouse or left and rihgt keys. Loser.", 200,
                     300);
+
     }
 
     //changes coordinates of ball so that next time the screen is repainted,
@@ -157,15 +159,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     private boolean hit(Ball b, MyRectangle r){
-
-        /*for(int i = 0; i <=b.getRadius(); i++){
-            if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth()
-                    && b.getY() + i >= r.getY() && b.getY() + i <= r.getY() + r.getHeight()){
-                addToPoint();
-                return true;
-            }
-        }*/
-
         for(int i = 0; i <=b.getRadius(); i++){
             if(b.getX()+ i >= r.getX() - (r.getWidth()/2) && b.getX() + i <= r.getX() + r.getWidth()/2
                     && b.getY() + i >= r.getY()  - (r.getHeight()/2) && b.getY() + i <= r.getY() + r.getHeight()/2 ){
@@ -174,7 +167,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             }
         }
         return false;
-
     }
 
     public void mouseMoved(MouseEvent e) {
@@ -263,8 +255,9 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         }
     }
 
-    public static void endGameSequence() {
+    public static void endGameSequence() { //vright herepifjasjfasdkfla
         //todo: add words that say "game over" or something;
+
     }
 
     public void updateMouseCoordinates(MouseEvent e) {

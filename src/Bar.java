@@ -20,28 +20,6 @@ public class Bar extends MyRectangle{
         g.setColor(oldColor);
     }
 
-    ////????????????????Am I doing a move? Not doing a move?
-   /*public void move(){
-        int xVal = super.getX();
-        if(xVal + super.getWidth() > super.getPanelWidth()){  //include getWidth() so we bounce off on the right edge
-            direction=0; //negative;
-            xVal-=velocity;
-        }
-        else if(xVal - super.getWidth() < 0){
-
-            xVal+=velocity;
-            direction = 1; //positive
-        }
-        else
-        {
-            if(direction == 1)
-                xVal+=velocity;
-            else
-                xVal-=velocity;
-        }
-        super.setX(xVal);
-    }*/
-
     public void reset() {
         setXY(350, 425);
     }
