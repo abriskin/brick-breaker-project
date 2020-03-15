@@ -6,7 +6,9 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -141,8 +143,21 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public String getHighScore() {
-        if (points > highScore)
-            highScore = points;
+        int highScore = 0;
+        try {
+            Scanner fileReader = new Scanner(new File("highscores.txt"));
+            highScore = fileReader.nextInt();
+            fileReader.close();
+            if (highScore > points) {
+                PrintWriter writer = new PrintWriter(new File("highScores.txt"));
+                writer.println(points);
+                writer.close();
+            }
+        }
+        catch (IOException e){
+            System.out.println("file not found");
+        }
+
         return "The highest score in this iteration was " + highScore;
     }
 
@@ -157,6 +172,10 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public int getRounds() {
         return rounds;
+    }
+
+    public void subtractLife() {
+        lives--;
     }
 
     public void updateMouseCoordinates(MouseEvent e) {
