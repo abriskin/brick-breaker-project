@@ -21,13 +21,11 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private Bar bar;
     private BufferedImage heart;
     private int lives, points, mouseX, mouseY;
-    private static int rounds = 0;
     private int highScore = 0;
     Timer timer;
 
     public UserPanel(int width, int length) {
-        ball = new Ball(300, 400, rounds);
-        bar = new Bar(300, 425, rounds);
+        ball = new Ball(300, 400);
         BrickList = new ArrayList<Brick>();
         try {
             heart = ImageIO.read(new File("uglyheart.jpg"));
@@ -105,15 +103,13 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void startGame() {
         lives = 3;
-        ball.setXY(350, 400);
-        bar.setXY(350, 425);
-        //todo: change ball & bar to starting positions
+        ball.reset();
+        bar.reset();
         for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
                 BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
             }
         }
-
         timer.start();
         lives = 3;
         points = 0;
@@ -174,10 +170,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         return points;
     }
 
-    public int getRounds() {
-        return rounds;
-    }
-
     public void subtractLife() {
         lives--;
     }
@@ -207,7 +199,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         }
         return img;
     }
-
 
     public void setDisplay(GameStats d) {
         //todo: figure out

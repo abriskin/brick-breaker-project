@@ -4,12 +4,19 @@ public class Ball extends GameObject {
     private int radius;
     private int velocity, xDirection, yDirection;
 
-    public Ball(int x, int y, int round) {
+    public Ball(int x, int y) {
         super(x, y);
         radius = 10;
         xDirection = 0;
         yDirection = 1;
-        velocity = 5 * round + 10;
+        velocity = 15;
+    }
+
+    public void reset() {
+        setXY(350, 425);
+        velocity = 15;
+        xDirection = 0;
+        yDirection = 1;
     }
 
     public void draw(Graphics g) { // need to draw them in the right coordinates

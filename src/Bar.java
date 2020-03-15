@@ -42,6 +42,10 @@ public class Bar extends Rectangle{
         super.setX(xVal);
     }
 
+    public void reset() {
+        setXY(350, 400);
+    }
+
     public void moveToMouse(int x) {
         super.setX(x);
     }

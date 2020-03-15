@@ -41,6 +41,7 @@ public class Brick extends Rectangle {
         }
         else{}
     }
+
 /*
     public void move() {
         int xVal = getX();

@@ -1,3 +1,5 @@
+import javafx.scene.layout.BackgroundRepeat;
+
 import java.awt.*;
 
 public abstract class GameObject {
