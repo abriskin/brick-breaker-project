@@ -79,15 +79,17 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         if (win) {
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1000,1000);
+            Font font = new Font ("Verdana", Font.BOLD, 27);
+            g.setFont(font);
             g.setColor(Color.WHITE);
             g.drawString("YOU WIN",  200, 200);
         }
         else if (running == GameState.STOPPED) {
             timer.stop();
-            Font font = new Font ("Verdana", Font.BOLD, 27);
-            g.setFont(font);
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1000,1000);
+            Font font = new Font("Verdana", Font.BOLD, 20);
+            g.setFont(font);
             g.setColor(Color.WHITE);
             g.drawString("GAME OVER",200,200);
         }
@@ -102,7 +104,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             }
 
             for (int i = 0; i < lives; i++) {
-                g.drawImage(scale(heart, 20, 20), 500 + i * 25, 10, null);
+                g.drawImage(scale(heart, 20, 20), 550 - i * 25, 10, null);
             }
 
             game.update(points);
@@ -123,13 +125,15 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     //changes coordinates of ball so that next time the screen is repainted,
     //the ball will be drawn in that new place
     public void checkStats() {
-        /*if(didItHitBrick())
-            Brick b = findHitBrick();*/
-        if (BrickList.size() == 0)
+
+        if (BrickList.size() == 0) {
             win = true;
+        }
         else {
-            if (ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar))
+            if (ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar)) {
                 subtractLife();
+                ball.reset();
+            }
             colorChangeTimer++;
             if (colorChangeTimer % 5 == 0) {
                 for (GameObject GO : GameObjectArray) {
@@ -162,7 +166,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
                 return BrickList.get(i);
             }
         }
-        return BrickList.get(0);
+        Brick b = new Brick(4, 5);
+        return b;
     }
 
     private int whereHit(Ball b, MyRectangle r){
@@ -220,11 +225,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         bar.reset();
         setBackground(Color.BLACK);
         BrickList.clear();
-        for(int i  = 0; i < 5; i++) {
+        BrickList.add(new Brick(100 + 100, 100 + 50));
+        /*for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
                 BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
             }
-        }
+        }*/
         timer.start();
         points = 0;
         running = GameState.PLAYING;
