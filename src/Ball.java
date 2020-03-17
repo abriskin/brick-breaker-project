@@ -63,7 +63,7 @@ public class Ball extends GameObject {
             xVal = 350;
             xDirection = 0;
             yDirection = 1;
-            UserPanel.subtractLife();
+            //UserPanel.subtractLife();
         } else if (where == 2){
             yDirection = 0;
             yVal -= velocity;

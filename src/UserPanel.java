@@ -17,7 +17,7 @@ import static java.awt.event.KeyEvent.*;
 public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         MouseMotionListener, ActionListener, KeyListener {
 
-    private boolean win;
+    private boolean win, lose;
     private GameState running;
     private ArrayList<Brick> BrickList;
     private Ball ball;
@@ -77,6 +77,17 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             g.fillRect(0,0,1000,1000);
             g.setColor(Color.WHITE);
             g.drawString("YOU WIN",  200, 200);
+            win = false;
+        }
+        else if (lose) {
+            timer.stop();
+            Font font = new Font ("Verdana", Font.BOLD, 27);
+            g.setFont(font);
+            g.setColor(Color.BLACK);
+            g.fillRect(0,0,1000,1000);
+            g.setColor(Color.WHITE);
+            g.drawString("YOU LOSE",200,200);
+            lose = false;
         }
         else {
             for (Brick b : BrickList) {
@@ -92,10 +103,13 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
                 BrickList.get(i).draw(g);
             }
 
-            if (!(running == GameState.PLAYING))
+            if (!(running == GameState.PLAYING)) {
+                Font font = new Font("Verdana", Font.BOLD, 27);
+                g.setFont(font);
                 g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
-                                "bar using the mouse or left and rihgt keys. Loser.", 200,
-                        300);
+                                "bar using the mouse or left and rihgt keys. Loser.", 100,
+                        250);
+            }
         }
     }
 
@@ -248,26 +262,20 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void stopGame() {
-        timer.stop();
         points = 0;
         running = GameState.STOPPED;
-        endGameSequence();
+        lose = true;
     }
 
     public int getPoints() {
         return points;
     }
 
-    public static void subtractLife() {
+    public void subtractLife() {
         lives--;
         if (lives == 0) {
-            endGameSequence();
+            lose = true;
         }
-    }
-
-    public static void endGameSequence() { //vright herepifjasjfasdkfla
-        //todo: add words that say "game over" or something;
-
     }
 
     public void updateMouseCoordinates(MouseEvent e) {
