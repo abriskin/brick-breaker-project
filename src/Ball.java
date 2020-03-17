@@ -6,7 +6,7 @@ public class Ball extends GameObject {
 
     public Ball(int x, int y) {
         super(x, y);
-        radius = 100; // Note, the radius is actually a diameter
+        radius = 20; // Note, the radius is actually a diameter
         xDirection = 0;
         yDirection = 1;
         velocity = 3;
@@ -20,13 +20,11 @@ public class Ball extends GameObject {
     }
 
     public void draw(Graphics g) { // need to draw them in the right coordinates
-        Color oldColor = g.getColor();
         g.setColor(super.getColor());
         // Translates circle's center to rectangle's origin for drawing.
         g.fillOval(super.getX() - radius / 2, super.getY() - radius / 2, radius, radius);
         /*else
             g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
-        g.setColor(oldColor);
     }
 
     public int getRadius() {
@@ -99,9 +97,9 @@ public class Ball extends GameObject {
             yDirection = 0;
             yVal -= velocity;
             if(xDirection == 0)
-                xVal -= Math.abs(super.getX() - (b.getX() + 100));
+                xVal -= Math.abs(super.getX() - (b.getX() + 50));
             else
-                xVal += Math.abs(super.getX() - (b.getX() + 100));
+                xVal += Math.abs(super.getX() - (b.getX() + 50));
             super.setX(xVal);
             super.setY(yVal);
         }

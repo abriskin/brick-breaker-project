@@ -140,16 +140,16 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     private int whereHit(Ball b, MyRectangle r){
         for(int i = 0; i <=b.getRadius(); i++){
-            if(b.getX()+i == r.getX()-r.getWidth()/2 && b.getY() + i >= r.getY() && b.getY() + i <= r.getY() + r.getHeight())
+            if(b.getX()+i == r.getX()-r.getWidth()/2 && b.getY() + i >= r.getY()-r.getHeight()/2 && b.getY() + i <= r.getY() + r.getHeight()/2)
                 return 1;
-            else if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i == r.getY()){
+            else if(b.getX()+i >= r.getX() - r.getWidth()/2 && b.getX() + i <= r.getX() + r.getWidth()/2 && b.getY() + i == r.getY()-r.getHeight()/2){
                 return 2;
             }
-            else if(b.getX() + i == r.getX() + r.getWidth() && b.getY() + i >= r.getY()
-                    && b.getY() + i <= r.getY() + r.getHeight()){
+            else if(b.getX() + i == r.getX() + r.getWidth()/2 && b.getY() + i >= r.getY() - r.getHeight()/2
+                    && b.getY() + i <= r.getY() + r.getHeight()/2){
                 return 3;
             }
-            else if(b.getX()+i >= r.getX() && b.getX() + i <= r.getX() + r.getWidth() && b.getY() + i == r.getY() + r.getHeight()){
+            else if(b.getX()+i >= r.getX() - r.getWidth()/2 && b.getX() + i <= r.getX() + r.getWidth()/2 && b.getY() + i == r.getY() + r.getHeight()/2){
                 return 4;
             }
         }
@@ -191,12 +191,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         lives = 3;
         ball.reset();
         bar.reset();
-        BrickList.add(new Brick(100 + 100*3, 100 + 150));
-        /*for(int i  = 0; i < 5; i++) {
+        //BrickList.add(new Brick(100 + 100*3, 100 + 150));
+        for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
                 BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
             }
-        }*/
+        }
         timer.start();
         lives = 3;
         points = 0;
