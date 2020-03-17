@@ -58,7 +58,6 @@ public abstract class GameObject {
         return panelWidth;
     }
 
-    public abstract void move(int x);
     public abstract void draw(Graphics g);
 
 }

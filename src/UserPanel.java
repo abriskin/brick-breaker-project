@@ -121,7 +121,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         if (BrickList.size() == 0)
             win = true;
         else {
-            ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar);
+            if (ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar))
+                subtractLife();
             ball.changeColor();
             for (Brick b : BrickList) {
                 b.changeColor();
