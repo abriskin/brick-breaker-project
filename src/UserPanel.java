@@ -17,8 +17,10 @@ import static java.awt.event.KeyEvent.*;
 public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         MouseMotionListener, ActionListener, KeyListener {
 
+    private int colorChangeTimer = 0;
     private boolean win, lose;
     private GameState running;
+    private GameStats game;
     private ArrayList<Brick> BrickList;
     private Ball ball;
     private Bar bar;
@@ -26,12 +28,15 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private int points, mouseX, mouseY;
     private static int lives;
     private int highScore = 0;
+    private ArrayList<GameObject> GameObjectArray = new ArrayList<GameObject>();
     Timer timer;
 
     public UserPanel(int width, int length) {
         bar = new Bar(300, 425);
         ball = new Ball(300, 400);
         BrickList = new ArrayList<Brick>();
+        GameObjectArray.add(bar);
+        GameObjectArray.add(ball);
         try {
             heart = ImageIO.read(new File("uglyheart.jpg"));
         } catch (IOException e) {
@@ -42,7 +47,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addMouseMotionListener(this);
         addKeyListener(this);
         timer = new Timer(40, this);
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -90,18 +94,30 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             lose = false;
         }
         else {
-            for (Brick b : BrickList) {
+            for (GameObject GO : GameObjectArray) {
+                GO.draw(g);
+            }
+
+            for (Brick b: BrickList) {
                 b.draw(g);
             }
+
             for (int i = 0; i < lives; i++) {
                 g.drawImage(scale(heart, 20, 20), 530 + i * 25, 10, null);
             }
-            ball.draw(g);
-            bar.draw(g);
 
-            for (int i = 0; i < BrickList.size(); i++) {
-                BrickList.get(i).draw(g);
+            colorChangeTimer++;
+            if (colorChangeTimer % 20 == 0) {
+                for (GameObject GO : GameObjectArray) {
+                    GO.changeColor();
+                }
+
+                for (Brick b: BrickList) {
+                    b.changeColor();
+                }
             }
+
+            game.update(points);
 
             if (!(running == GameState.PLAYING)) {
                 Font font = new Font("Verdana", Font.BOLD, 27);
@@ -123,6 +139,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         else {
             if (ball.move(didItHitBrick(), didItHitBar(), whereHit(ball, findHitBrick()), bar))
                 subtractLife();
+
             ball.changeColor();
             for (Brick b : BrickList) {
                 b.changeColor();
@@ -306,6 +323,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public void setDisplay(GameStats d) {
+        game = d;
         d.update(points);
     }
 

@@ -2,9 +2,8 @@ import java.awt.*;
 
 public abstract class GameObject {
 
-    private static int shorterTimer;
     private int centerX, centerY;
-    private Color color;
+    private Color color = Color.DARK_GRAY;
     private boolean filled;
     private static int panelWidth = 600; //All enemies will share this information
     Color[] colorList = new Color[]{Color.RED, Color.ORANGE, Color.YELLOW,
@@ -49,9 +48,11 @@ public abstract class GameObject {
     }
 
     public void changeColor() {
-        shorterTimer++;
-        if (shorterTimer % 20 == 0)
-            color = colorList[(int) (Math.random() * colorList.length)];
+        Color newColor = color;
+        while (color.equals(newColor)) {
+            newColor = colorList[(int) (Math.random() * colorList.length)];
+        }
+        color = newColor;
     }
 
     public int getPanelWidth(){

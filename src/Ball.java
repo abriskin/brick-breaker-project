@@ -8,7 +8,7 @@ public class Ball extends GameObject {
         super(x, y);
         radius = 20; // Note, the radius is actually a diameter
         xDirection = 0;
-        yDirection = 1;
+        yDirection = 0;
         velocity = 3;
     }
 
