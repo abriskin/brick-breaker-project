@@ -8,7 +8,7 @@ public class Ball extends GameObject {
         radius = 20; // Note, the radius is actually a diameter
         xDirection = 0;
         yDirection = 0;
-        velocity = 3;
+        velocity = 2;
     }
 
     public void reset() {
