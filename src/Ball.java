@@ -16,7 +16,6 @@ public class Ball extends GameObject {
         velocity = 3;
         xDirection = 0;
         yDirection = 0;
-        System.out.println("Is reseting");
     }
 
     public void draw(Graphics g) { // need to draw them in the right coordinates

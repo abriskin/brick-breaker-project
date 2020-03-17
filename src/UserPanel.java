@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.awt.Point;
-import java.awt.Rectangle;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -27,7 +25,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     private BufferedImage heart;
     private int points;
     private static int lives;
-    private int highScore = 0;
+    private int highScore;
     private ArrayList<GameObject> GameObjectArray = new ArrayList<GameObject>();
     Timer timer;
 
@@ -47,6 +45,9 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         addMouseMotionListener(this);
         addKeyListener(this);
         timer = new Timer(10, this);
+        points = 0;
+        highScore = getHighScore();
+
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -77,10 +78,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         super.paintComponent(g);
 
         if (win) {
+            timer.stop();
             g.setColor(Color.BLACK);
             g.fillRect(0,0,1000,1000);
             g.setColor(Color.WHITE);
             g.drawString("YOU WIN",  200, 200);
+            getHighScore();
         }
         else if (running == GameState.STOPPED) {
             timer.stop();
@@ -148,6 +151,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             // checks if it's in both ranges
             // if true breaks out and does other stuff
             if (hit(ball, BrickList.get(i))) {
+                addPoint();
                 if (BrickList.get(i).wasHit() > 1)
                     BrickList.remove(i);
                 return true;
@@ -198,7 +202,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         for(int i = 0; i <=b.getRadius(); i++){
             if(b.getX()+ i >= r.getX() - (r.getWidth()/2) && b.getX() + i <= r.getX() + r.getWidth()/2
                     && b.getY() + i >= r.getY()  - (r.getHeight()/2) && b.getY() + i <= r.getY() + r.getHeight()/2 ){
-                addPoint();
                 return true;
             }
         }
@@ -254,18 +257,21 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public int getHighScore() {
-        int highScore = 0;
-        try {
-            Scanner fileReader = new Scanner(new File("C:\\Users\\" +
-                    "jessi\\IdeaProjects\\brick-breaker-project\\src\\" +
-                    "highscores.txt"));
+        try {//"C:\\Users\\" +
+            Scanner fileReader = new Scanner(new File(
+                    "/Users/JessicaL/IdeaProjects/brick-breaker-project/src/highscores.txt"));
+            highScore = 0;
+            System.out.println("0");
             highScore = fileReader.nextInt();
             fileReader.close();
-            if (highScore > points) {
+
+            if (points > highScore) {
                 PrintWriter writer = new PrintWriter(new File("highScores.txt"));
                 writer.println(points);
                 writer.close();
+                highScore = points;
             }
+
         }
         catch (IOException e){
             System.out.println("file not found");
