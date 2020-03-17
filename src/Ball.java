@@ -99,9 +99,9 @@ public class Ball extends GameObject {
             yDirection = 0;
             yVal -= velocity;
             if(xDirection == 0)
-                xVal -= Math.abs(super.getX() - (b.getX() + 50));
+                xVal -= Math.abs(super.getX() - (b.getX() + 25));
             else
-                xVal += Math.abs(super.getX() - (b.getX() + 50));
+                xVal += Math.abs(super.getX() - (b.getX() + 25));
             super.setX(xVal);
             super.setY(yVal);
             return false;
