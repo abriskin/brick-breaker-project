@@ -1,8 +1,7 @@
 import java.awt.*;
 
 public class Ball extends GameObject {
-    private int radius;
-    private int velocity, xDirection, yDirection;
+    private int radius, velocity, xDirection, yDirection;
 
     public Ball(int x, int y) {
         super(x, y);
@@ -17,6 +16,7 @@ public class Ball extends GameObject {
         velocity = 3;
         xDirection = 0;
         yDirection = 0;
+        System.out.println("Is reseting");
     }
 
     public void draw(Graphics g) { // need to draw them in the right coordinates
@@ -91,7 +91,7 @@ public class Ball extends GameObject {
 
     public boolean move(boolean hitBrick, boolean hitBar, int where, Bar b){
         int xVal = super.getX();
-        int yVal = super.getY(); // TODO: change it back to getX and getY
+        int yVal = super.getY();
         if (hitBrick) {
             return move(where);
         }

@@ -58,8 +58,6 @@ public class Brick extends MyRectangle {
 
 
             }
-            /*else
-                g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         }
         else{}
     }

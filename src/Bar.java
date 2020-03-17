@@ -19,7 +19,7 @@ public class Bar extends MyRectangle{
     }
 
     public void reset() {
-        setXY(350, 425);
+        setXY(300, 425);
     }
 
     public void moveToMouse(int x) {

@@ -92,11 +92,12 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             g.drawString("GAME OVER",200,200);
         }
         else {
+            setBackground(Color.BLACK);
             for (GameObject GO : GameObjectArray) {
                 GO.draw(g);
             }
 
-            for (Brick b: BrickList) {
+            for (Brick b : BrickList) {
                 b.draw(g);
             }
 
@@ -107,11 +108,14 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             game.update(points);
 
             if (!(running == GameState.PLAYING)) {
-                Font font = new Font("Verdana", Font.BOLD, 27);
+                Font font = new Font("Verdana", Font.BOLD, 20);
                 g.setFont(font);
-                g.drawString("Welcome to brick breaker!! YOu are gay. Move the" +
-                                "bar using the mouse or left and rihgt keys. Loser.", 100,
-                        250);
+                g.setColor(Color.WHITE);
+                g.drawString("Welcome to brick breaker!! YOu are gay.", 50,
+                        100);
+                g.drawString("Move the bar using the mouse or left and right keys", 50,
+                        200);
+                g.drawString("Loser.", 50, 300);
             }
         }
     }
@@ -214,7 +218,8 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         lives = 3;
         ball.reset();
         bar.reset();
-        //BrickList.add(new Brick(100 + 100*3, 100 + 150));
+        setBackground(Color.BLACK);
+        BrickList.clear();
         for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
                 BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
