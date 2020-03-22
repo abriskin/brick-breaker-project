@@ -16,8 +16,6 @@ public class MyRectangle extends GameObject{
         // Translates circle's center to rectangle's origin for drawing.
         if (super.isFilled())
             g.fillRect(super.getX() - width/2, super.getY() - height/2, width, height);
-        /*else
-            g.drawRect(centerX - width/2, centerY - height/2, width, height);*/
         g.setColor(oldColor);
     }
 
@@ -27,7 +25,6 @@ public class MyRectangle extends GameObject{
     public int getHeight() {
         return height;
     }
-    public void move(int x){
-    }
+   // public void move(int x){ };
 
 }

@@ -229,11 +229,11 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         setBackground(Color.BLACK);
         BrickList.clear();
         BrickList.add(new Brick(100 + 100, 100 + 50));
-        /*for(int i  = 0; i < 5; i++) {
+        for(int i  = 0; i < 5; i++) {
             for(int a = 0; a < 5; a++) {
                 BrickList.add(new Brick(100 + 100*a, 100 + 50 * i));
             }
-        }*/
+        }
         timer.start();
         points = 0;
         running = GameState.PLAYING;
@@ -266,8 +266,6 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
         try {//"C:\\Users\\" +
             Scanner fileReader = new Scanner(new File(
                     "/Users/JessicaL/IdeaProjects/brick-breaker-project/src/highscores.txt"));
-            highScore = 0;
-            System.out.println("0");
             highScore = fileReader.nextInt();
             fileReader.close();
 
@@ -277,12 +275,10 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
                 writer.close();
                 highScore = points;
             }
-
         }
         catch (IOException e){
             System.out.println("file not found");
         }
-
         return highScore;
     }
 
