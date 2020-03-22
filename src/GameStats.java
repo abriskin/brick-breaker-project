@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 public class GameStats extends JPanel {
     private JTextField gameNameText, currentHighScorer, currentHighScore;
     private int yourScore;
-    private JLabel yourScoreText;
+    private JLabel yourScoreText, yourHighScore;
     private JavaArcade game;
 
     //Constructor
@@ -21,7 +21,9 @@ public class GameStats extends JPanel {
         gName.setForeground(Color.red);
         gName.setFont(gameNameFont);
         add(gName);
-        add(new JLabel(" Current High Score:   " + t.getHighScore()));
+
+        yourHighScore = new JLabel(" Current High Score:   " + t.getHighScore());
+        add(yourHighScore);
 
         add(new JLabel(" "));
         yourScoreText = new JLabel(" Your Final Score: " + 0);
@@ -30,6 +32,11 @@ public class GameStats extends JPanel {
         Font displayFont = new Font("Monospaced", Font.BOLD, 16);
         game = t;
 
+    }
+
+    public void update(int points, int highScore) {
+        yourScoreText.setText("Your Score: " + points);
+        yourHighScore.setText("Current High Score: " + highScore);
     }
 
     public void update(int points) {

@@ -95,23 +95,20 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
             g.setFont(font);
             g.setColor(Color.WHITE);
             g.drawString("GAME OVER",200,200);
+            game.gameOver(getPoints());
         }
         else {
             setBackground(Color.BLACK);
             for (GameObject GO : GameObjectArray) {
                 GO.draw(g);
             }
-
             for (Brick b : BrickList) {
                 b.draw(g);
             }
-
             for (int i = 0; i < lives; i++) {
                 g.drawImage(scale(heart, 20, 20), 550 - i * 25, 10, null);
             }
-
-            game.update(points);
-
+            game.update(points, getHighScore());
             if (!(running == GameState.PLAYING)) {
                 Font font = new Font("Verdana", Font.BOLD, 20);
                 g.setFont(font);
@@ -263,7 +260,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
     }
 
     public int getHighScore() {
-        try {//"C:\\Users\\" +
+        try {
             Scanner fileReader = new Scanner(new File(
                     "/Users/JessicaL/IdeaProjects/brick-breaker-project/src/highscores.txt"));
             highScore = fileReader.nextInt();
@@ -271,9 +268,9 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
             if (points > highScore) {
                 PrintWriter writer = new PrintWriter(new File("highScores.txt"));
-                writer.println(points);
+                writer.print(points);
                 writer.close();
-                highScore = points;
+               highScore = points;
             }
         }
         catch (IOException e){
@@ -320,7 +317,7 @@ public class UserPanel extends JPanel implements JavaArcade, MouseListener,
 
     public void setDisplay(GameStats d) {
         game = d;
-        d.update(points);
+        d.update(points, getHighScore());
     }
 
     public void mouseClicked(MouseEvent e) {
